@@ -1,0 +1,482 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonic Reading Test - Baca Not Balok</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #000000;
+            --panel: #111111;
+            --panel-dark: #080808;
+            --border: #ffffff;
+            --btn: #222222;
+            --btn-hover: #444444;
+            --text: #ffffff;
+            --soft: #cccccc;
+            --good: #ffffff;
+            --bad: #999999;
+            --gold: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 24px 14px;
+            text-align: center;
+        }
+
+        .screen {
+            background: var(--panel);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            max-width: 680px;
+            margin: 0 auto;
+            box-shadow: 0 0 24px rgba(255, 255, 255, 0.08);
+        }
+
+        h1 {
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 26px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 15px;
+            color: var(--soft);
+            margin: 4px 0 18px 0;
+            font-weight: 600;
+        }
+
+        #info {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            min-height: 22px;
+        }
+
+        /* Kotak not balok, latar putih supaya paranada jelas */
+        #notationBox {
+            background: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+            margin: 14px auto;
+            padding: 8px;
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        #notationBox svg, #notationBox img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #notationBox .placeholder {
+            color: #111111;
+            font-size: 54px;
+        }
+
+        #status {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--gold);
+            margin: 6px 0 12px 0;
+            min-height: 30px;
+        }
+
+        .answer-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .ans-btn {
+            background: var(--btn);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            padding: 14px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #555555;
+            transition: 0.12s;
+        }
+
+        .ans-btn:hover:not(:disabled) {
+            background: var(--btn-hover);
+            border-color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .ans-btn:active:not(:disabled) {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #555555;
+        }
+
+        .ans-btn:disabled {
+            background: #151515;
+            border-color: #444444;
+            color: #777777;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        #feedback {
+            margin-top: 16px;
+            padding: 14px;
+            background: var(--panel-dark);
+            border: 2px dashed #777777;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.6;
+            min-height: 90px;
+            text-align: left;
+        }
+
+        #scoreBoard {
+            margin-top: 18px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        #scoreBoard span.val {
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+        .main-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            padding: 14px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #777777;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .main-btn:hover { background: #dddddd; }
+        .main-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #777777; }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 22px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-link:hover { color: #ffffff; text-decoration: underline; }
+
+        @media (max-width: 480px) {
+            .ans-btn { font-size: 18px; padding: 12px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen">
+        <h1>Harmonic Reading Test</h1>
+        <h2>Section B: Baca Not Balok (Tuts Putih)</h2>
+
+        <div id="info">Tekan mulai untuk memulai ujian membaca not.</div>
+
+        <div id="notationBox"><span class="placeholder">🎹</span></div>
+
+        <div id="status">Siap?</div>
+
+        <div class="answer-grid" id="answerGrid"></div>
+
+        <div id="feedback">Tekan huruf di keyboard (C D E F G A B) atau klik tombol di layar. Tiap soal dibatasi waktu baca, jadi jangan kelamaan mikir ya.</div>
+
+        <div id="scoreBoard">
+            SKOR: <span class="val" id="score">0</span> &nbsp;|&nbsp; LATENCY: <span class="val" id="latency">-</span> ms
+        </div>
+
+        <button class="main-btn" id="startBtn" onclick="startSession()">MULAI UJIAN</button>
+
+        <div class="nav-links">
+            <a href="reading-material.html" class="nav-link">← Baca Materi Dulu</a>
+            <a href="index.html" class="nav-link">🏠 Home Menu</a>
+        </div>
+    </div>
+
+    <script>
+        /* =====================================================
+           PENGATURAN
+           ===================================================== */
+
+        const USE_PNG = false;
+
+        const SUMBER_VEXFLOW = [
+            'https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js',
+            'https://unpkg.com/vexflow@4.2.2/build/cjs/vexflow.js'
+        ];
+
+        function muatVexFlow(i) {
+            if (typeof Vex !== 'undefined' || i >= SUMBER_VEXFLOW.length) return;
+            const s = document.createElement('script');
+            s.src = SUMBER_VEXFLOW[i];
+            s.onerror = function () { muatVexFlow(i + 1); };
+            document.head.appendChild(s);
+        }
+        if (!USE_PNG) muatVexFlow(0);
+
+        const TOTAL_SOAL = 10;
+        const BATAS_CEPAT_MS = 4000;
+        const POIN_BENAR = 100;
+        const POTONGAN_LAMBAT = 40;
+        const JEDA_BENAR_MS = 2000;
+        const JEDA_SALAH_MS = 3800;
+
+        const NOTE_NAMES = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+        const DEGREE = { C: 1, D: 2, E: 3, F: 4, G: 5, A: 6, B: 7 };
+
+        const PUJIAN = ["🎹 GOKIL!", "🎹 SEMPURNA!", "🎹 MATA LO TAJAM!", "🎹 REFLEKS DEWA!"];
+
+        const PETUNJUK = {
+            treble: "Kunci G (treble): garis dari bawah ke atas = E G B D F, spasi dari bawah ke atas = F A C E. Not di luar paranada dihitung dari garis bantu terdekat.",
+            bass: "Kunci F (bass): garis dari bawah ke atas = G B D F A, spasi dari bawah ke atas = A C E G. Not di luar paranada dihitung dari garis bantu terdekat."
+        };
+
+        function buatBank() {
+            const bank = [];
+
+            function rentang(clef, oktafAwal, jumlahNot) {
+                let idx = 0;
+                let oktaf = oktafAwal;
+                for (let i = 0; i < jumlahNot; i++) {
+                    bank.push({ clef: clef, note: NOTE_NAMES[idx], oktaf: oktaf });
+                    idx++;
+                    if (idx === 7) { idx = 0; oktaf++; }
+                }
+            }
+
+            rentang('treble', 4, 15);
+            rentang('bass', 2, 15);
+            return bank;
+        }
+
+        const BANK = buatBank();
+
+        function gambarNot(clef, note, oktaf) {
+            const box = document.getElementById('notationBox');
+            box.innerHTML = '';
+
+            if (USE_PNG) {
+                const img = document.createElement('img');
+                img.src = clef + '_' + note + oktaf + '.png';
+                img.alt = 'Not balok';
+                img.onerror = function () {
+                    box.innerHTML = '<span style="color:#111111;font-weight:700;">Gambar ' + img.src.split('/').pop() + ' tidak ditemukan.</span>';
+                };
+                box.appendChild(img);
+                return;
+            }
+
+            if (typeof Vex === 'undefined') {
+                box.innerHTML = '<span style="color:#111111;font-weight:700;">Library VexFlow gagal dimuat. Cek koneksi internet lalu refresh halaman.</span>';
+                return;
+            }
+
+            const VF = Vex.Flow;
+            const renderer = new VF.Renderer(box, VF.Renderer.Backends.SVG);
+            renderer.resize(420, 300);
+            const ctx = renderer.getContext();
+            ctx.scale(1.4, 1.4);
+
+            const stave = new VF.Stave(10, 70, 270);
+            stave.addClef(clef);
+            stave.setContext(ctx).draw();
+
+            const key = note.toLowerCase() + '/' + oktaf;
+            const vexNote = new VF.StaveNote({ clef: clef, keys: [key], duration: 'w' });
+
+            const voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+            voice.addTickables([vexNote]);
+            new VF.Formatter().joinVoices([voice]).format([voice], 170);
+            voice.draw(ctx, stave);
+        }
+
+        let soal = [];
+        let idx = 0;
+        let skor = 0;
+        let benar = 0;
+        let statistik = { treble: [0, 0], bass: [0, 0] };
+        let waktuMulai = 0;
+        let bolehJawab = false;
+
+        (function buatTombol() {
+            const grid = document.getElementById('answerGrid');
+            NOTE_NAMES.forEach(function (n) {
+                const b = document.createElement('button');
+                b.className = 'ans-btn';
+                b.textContent = n;
+                b.disabled = true;
+                b.setAttribute('data-note', n);
+                b.onclick = function () { jawab(n); };
+                grid.appendChild(b);
+            });
+        })();
+
+        function aktifkanTombol(status) {
+            document.querySelectorAll('.ans-btn').forEach(function (b) { b.disabled = !status; });
+        }
+
+        function acak(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const t = a[i]; a[i] = a[j]; a[j] = t;
+            }
+            return a;
+        }
+
+        function startSession() {
+            soal = acak(BANK).slice(0, Math.min(TOTAL_SOAL, BANK.length));
+            idx = 0;
+            skor = 0;
+            benar = 0;
+            statistik = { treble: [0, 0], bass: [0, 0] };
+            document.getElementById('score').innerText = '0';
+            document.getElementById('latency').innerText = '-';
+            document.getElementById('startBtn').style.display = 'none';
+            tampilkanSoal();
+        }
+
+        function tampilkanSoal() {
+            if (idx >= soal.length) { selesai(); return; }
+
+            const s = soal[idx];
+            gambarNot(s.clef, s.note, s.oktaf);
+
+            const namaClef = s.clef === 'treble' ? 'KUNCI G (TREBLE)' : 'KUNCI F (BASS)';
+            document.getElementById('info').innerText = 'SOAL ' + (idx + 1) + ' DARI ' + soal.length + '  |  ' + namaClef;
+
+            const st = document.getElementById('status');
+            st.innerText = 'Ini not apa?';
+            st.style.color = 'var(--gold)';
+
+            document.getElementById('feedback').innerText = 'Baca posisi not di paranada, lalu jawab secepat mungkin!';
+
+            aktifkanTombol(true);
+            bolehJawab = true;
+            waktuMulai = Date.now();
+        }
+
+        function jawab(huruf) {
+            if (!bolehJawab) return;
+            bolehJawab = false;
+            aktifkanTombol(false);
+
+            const waktu = Date.now() - waktuMulai;
+            const s = soal[idx];
+            const st = document.getElementById('status');
+            const fb = document.getElementById('feedback');
+
+            statistik[s.clef][1]++;
+
+            const benarHuruf = s.note;
+            const label = benarHuruf + s.oktaf;
+            const tingkat = DEGREE[benarHuruf];
+
+            if (huruf === benarHuruf) {
+                let poin = POIN_BENAR;
+                let catatan = '';
+                if (waktu > BATAS_CEPAT_MS) {
+                    poin -= POTONGAN_LAMBAT;
+                    catatan = '<br><span style="color:#ffffff;">(Telat baca! Poin dikurangi ' + POTONGAN_LAMBAT + ')</span>';
+                }
+                skor += poin;
+                benar++;
+                statistik[s.clef][0]++;
+
+                const puji = PUJIAN[Math.floor(Math.random() * PUJIAN.length)];
+                st.innerText = 'BENAR!';
+                st.style.color = 'var(--good)';
+                fb.innerHTML = '<span style="color:var(--good);font-weight:900;">' + puji + ' TEPAT! +' + poin + '</span><br>' +
+                    'Not ' + label + ' = family chord ' + tingkat + ' di C Major.' + catatan;
+            } else {
+                st.innerText = 'SALAH!';
+                st.style.color = 'var(--bad)';
+                fb.innerHTML = '❌ <span style="color:var(--bad);font-weight:900;">Jawaban lo ' + huruf + ', padahal itu not ' + label + '</span> ' +
+                    '(family chord ' + tingkat + ' di C Major).<br>💡 ' + PETUNJUK[s.clef];
+            }
+
+            document.getElementById('score').innerText = skor;
+            document.getElementById('latency').innerText = waktu;
+
+            idx++;
+            setTimeout(tampilkanSoal, huruf === benarHuruf ? JEDA_BENAR_MS : JEDA_SALAH_MS);
+        }
+
+        function selesai() {
+            const total = soal.length;
+            const persen = total ? Math.round(benar / total * 100) : 0;
+
+            let level;
+            if (persen >= 90) level = 'NATIVE READER';
+            else if (persen >= 70) level = 'ADVANCED';
+            else if (persen >= 50) level = 'INTERMEDIATE';
+            else level = 'BEGINNER (banyakin latihan baca not ya!)';
+
+            const t = statistik.treble;
+            const b = statistik.bass;
+            let rincian = '';
+            if (t[1]) rincian += 'Treble: ' + t[0] + '/' + t[1] + ' benar &nbsp; ';
+            if (b[1]) rincian += 'Bass: ' + b[0] + '/' + b[1] + ' benar';
+
+            document.getElementById('notationBox').innerHTML = '<span class="placeholder">🎹</span>';
+            document.getElementById('info').innerText = 'UJIAN SELESAI';
+
+            const st = document.getElementById('status');
+            st.innerText = 'Level: ' + level;
+            st.style.color = 'var(--gold)';
+
+            document.getElementById('feedback').innerHTML =
+                'Benar <b>' + benar + '</b> dari <b>' + total + '</b> soal (' + persen + '%).<br>' +
+                'Skor akhir: <b>' + skor + '</b><br>' + rincian;
+
+            const sb = document.getElementById('startBtn');
+            sb.innerText = 'ULANGI UJIAN (SOAL BARU)';
+            sb.style.display = 'block';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (!bolehJawab) return;
+            const huruf = (e.key || '').toUpperCase();
+            if (NOTE_NAMES.indexOf(huruf) !== -1) jawab(huruf);
+        });
+    </script>
+</body>
+</html>
+```

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sound Within | Harmonic Fluency Test</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #ffffff; color: #111111; text-align: center; padding: 20px; margin: 0; }
+        .screen { background: #ffffff; padding: 40px 30px; border-radius: 12px; border: 2px solid #111111; display: inline-block; box-shadow: none; max-width: 650px; width: 100%; box-sizing: border-box; position: relative; }
+        h1 { margin-top: 0; color: #111111; font-weight: 900; text-transform: uppercase; font-size: 28px; letter-spacing: 1px; }
+        h2 { margin: 0 0 5px 0; color: #111111; font-size: 16px; font-weight: 700; }
+        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px; }
+        .btn { background: #111111; border: 2px solid #111111; color: #ffffff; padding: 20px; font-size: 26px; border-radius: 8px; cursor: pointer; transition: 0.1s; font-weight: 900; font-family: 'Segoe UI', sans-serif; text-transform: uppercase; box-shadow: 0 4px 0 #777777; }
+        .btn:hover { background: #ffffff; border-color: #111111; color: #111111; transform: translateY(-2px); box-shadow: 0 6px 0 #cccccc; }
+        .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #777777; }
+        .btn:disabled { background: #eeeeee; border-color: #cccccc; color: #888888; cursor: not-allowed; transform: none; box-shadow: none; }
+        .help-btn { position: absolute; top: 20px; right: 20px; background: #ffffff; color: #111111; border: 2px solid #111111; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; font-weight: 900; cursor: pointer; box-shadow: 0 3px 0 #777777; }
+        #roundInfo { font-size: 14px; color: #555555; margin: 10px 0 0 0; font-weight: 700; }
+        #status { font-size: 22px; margin: 20px 0; color: #111111; font-weight: 900; }
+        #feedback { font-size: 16px; margin: 15px 0; min-height: 50px; color: #111111; background: #f5f5f5; padding: 15px; border-radius: 8px; border: 2px dashed #777777; font-weight: 700; }
+        #scoreBoard { margin-top: 30px; font-size: 20px; color: #111111; border-top: 2px solid #cccccc; padding-top: 20px; font-weight: 700; }
+        .highlight-score { color: #111111; font-weight: 900; font-size: 26px; }
+        .tutorial-overlay { display: flex; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; }
+        .tutorial-content { background: #ffffff; border: 2px solid #111111; border-radius: 12px; padding: 30px; max-width: 500px; width: 90%; color: #111111; text-align: left; box-shadow: none; box-sizing: border-box; }
+        .tutorial-content h3 { color: #111111; margin-top: 0; font-size: 24px; font-weight: 900; text-align: center; border-bottom: 2px dashed #cccccc; padding-bottom: 10px; }
+        .tutorial-content p { font-size: 16px; line-height: 1.6; margin: 10px 0; }
+        .tutorial-btn { background: #111111; color: #ffffff; border: 2px solid #111111; width: 100%; padding: 15px; font-size: 20px; font-weight: 900; border-radius: 8px; margin-top: 20px; cursor: pointer; box-shadow: 0 4px 0 #777777; text-transform: uppercase; font-family: 'Segoe UI', sans-serif; }
+        .tutorial-btn:hover { background: #ffffff; color: #111111; }
+        .tutorial-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #777777; }
+        .home-btn { display: inline-block; width: 100%; box-sizing: border-box; margin-bottom: 24px; padding: 12px 18px; background: #ffffff; color: #111111; border: 2px solid #111111; border-radius: 8px; font-family: 'Segoe UI', sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; transition: background 0.2s, color 0.2s; }
+        .home-btn:hover { background: #111111; color: #ffffff; }
+        .action-btn { display: none; width: 100%; margin-top: 12px; padding: 15px; font-size: 16px; font-weight: 900; border-radius: 8px; cursor: pointer; font-family: 'Segoe UI', sans-serif; }
+        #finishBtn { background: #ffffff; color: #111111; border: 2px solid #111111; }
+        #finishBtn:hover { background: #eeeeee; }
+        #resultPanel { display: none; margin-top: 25px; padding: 22px; border: 2px solid #111111; border-radius: 10px; text-align: left; background: #f8f8f8; }
+        #resultPanel h2 { font-size: 22px; text-align: center; margin-bottom: 18px; }
+        .result-row { display: flex; justify-content: space-between; gap: 15px; padding: 10px 0; border-bottom: 1px solid #cccccc; }
+        .result-row:last-of-type { border-bottom: none; }
+        .result-value { font-weight: 900; text-align: right; }
+        #bandScore { font-size: 30px; }
+        #saveStatus { font-size: 13px; text-align: center; margin-top: 15px; color: #444444; }
+        #status [style*="color"] { color: #111111 !important; }
+        #feedback [style*="00ffff"] { color: #16803c !important; }
+        #feedback [style*="ff3333"] { color: #d11a2a !important; }
+        #feedback [style*="ffb3c6"], #feedback [style*="ffcc00"] { color: #333333 !important; }
+        #scoreBoard [style*="ffcc00"] { color: #444444 !important; }
+        .scale-controls { margin: 15px 0 8px; text-align: left; }
+        .scale-controls label { display: block; font-weight: 800; margin-bottom: 7px; }
+        .scale-controls select { width: 100%; padding: 12px; border: 2px solid #111111; border-radius: 8px; font: 700 15px 'Segoe UI', sans-serif; background: white; color: #111; }
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            .screen { padding: 32px 18px; }
+            .numpad { gap: 10px; }
+            .btn { padding: 16px 10px; font-size: 22px; }
+            h1 { font-size: 23px; }
+            .tutorial-content { padding: 22px; max-height: 90vh; overflow-y: auto; }
+            #resultPanel { padding: 16px; }
+            .result-row { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <div id="tutorialOverlay" class="tutorial-overlay">
+        <div class="tutorial-content">
+            <h3>CARA MAINNYA GINI, BRO!</h3>
+            <p><b>1. Dengerin:</b> Bakal ada bunyi chord dari family chord sesuai scale yang lo pilih. Tiap ronde progresinya baru dan tidak diulang.</p>
+            <p><b>2. Tebak Cepat:</b> Pake kuping lo! Itu chord ke berapa? Sikat tombol angkanya di layar, atau <b>tekan angka 1–7 di keyboard lo!</b></p>
+            <p><b>3. Jangan Lemot:</b> Ujian ini ngetes refleks. Kalau lo mikir lebih dari <b>1.5 detik</b>, skor lo bakal disunat 40 poin!</p>
+            <p><b>4. Evaluasi:</b> Kalau salah, baca evaluasinya di layar biar insting lo makin tajam.</p>
+            <p><b>5. Hasil:</b> Setelah selesai, tekan tombol akhir tes untuk menyimpan skor dan band score.</p>
+            <button class="tutorial-btn" onclick="closeTutorial()">PAHAM, GAS!</button>
+        </div>
+    </div>
+
+    <div class="screen">
+        <a href="website.html" class="home-btn">← KEMBALI KE MENU UTAMA</a>
+        <button class="help-btn" onclick="openTutorial()">?</button>
+        <h1>Harmonic Fluency Test</h1>
+        <h2>(HFT) - Section A: Real-Time Fluency</h2>
+
+        <div class="scale-controls">
+            <label for="scaleSelect">PILIH KEY DAN SCALE</label>
+            <select id="scaleSelect" onchange="changeScale()">
+                <optgroup label="Major">
+                    <option value="C|major" selected>C Major</option>
+                    <option value="C#|major">C# Major</option>
+                    <option value="D|major">D Major</option>
+                    <option value="Eb|major">Eb Major</option>
+                    <option value="E|major">E Major</option>
+                    <option value="F|major">F Major</option>
+                    <option value="F#|major">F# Major</option>
+                    <option value="G|major">G Major</option>
+                    <option value="Ab|major">Ab Major</option>
+                    <option value="A|major">A Major</option>
+                    <option value="Bb|major">Bb Major</option>
+                    <option value="B|major">B Major</option>
+                </optgroup>
+                <optgroup label="Minor">
+                    <option value="C|minor">C Minor</option>
+                    <option value="C#|minor">C# Minor</option>
+                    <option value="D|minor">D Minor</option>
+                    <option value="Eb|minor">Eb Minor</option>
+                    <option value="E|minor">E Minor</option>
+                    <option value="F|minor">F Minor</option>
+                    <option value="F#|minor">F# Minor</option>
+                    <option value="G|minor">G Minor</option>
+                    <option value="Ab|minor">Ab Minor</option>
+                    <option value="A|minor">A Minor</option>
+                    <option value="Bb|minor">Bb Minor</option>
+                    <option value="B|minor">B Minor</option>
+                </optgroup>
+                <optgroup label="Modes">
+                    <option value="C|dorian">C Dorian</option>
+                    <option value="C|phrygian">C Phrygian</option>
+                    <option value="C|lydian">C Lydian</option>
+                    <option value="C|mixolydian">C Mixolydian</option>
+                    <option value="C|locrian">C Locrian</option>
+                    <option value="C#|dorian">C# Dorian</option>
+                    <option value="C#|phrygian">C# Phrygian</option>
+                    <option value="C#|lydian">C# Lydian</option>
+                    <option value="C#|mixolydian">C# Mixolydian</option>
+                    <option value="C#|locrian">C# Locrian</option>
+                    <option value="D|dorian">D Dorian</option>
+                    <option value="D|phrygian">D Phrygian</option>
+                    <option value="D|lydian">D Lydian</option>
+                    <option value="D|mixolydian">D Mixolydian</option>
+                    <option value="D|locrian">D Locrian</option>
+                    <option value="Eb|dorian">Eb Dorian</option>
+                    <option value="Eb|phrygian">Eb Phrygian</option>
+                    <option value="Eb|lydian">Eb Lydian</option>
+                    <option value="Eb|mixolydian">Eb Mixolydian</option>
+                    <option value="Eb|locrian">Eb Locrian</option>
+                    <option value="E|dorian">E Dorian</option>
+                    <option value="E|phrygian">E Phrygian</option>
+                    <option value="E|lydian">E Lydian</option>
+                    <option value="E|mixolydian">E Mixolydian</option>
+                    <option value="E|locrian">E Locrian</option>
+                    <option value="F|dorian">F Dorian</option>
+                    <option value="F|phrygian">F Phrygian</option>
+                    <option value="F|lydian">F Lydian</option>
+                    <option value="F|mixolydian">F Mixolydian</option>
+                    <option value="F|locrian">F Locrian</option>
+                    <option value="F#|dorian">F# Dorian</option>
+                    <option value="F#|phrygian">F# Phrygian</option>
+                    <option value="F#|lydian">F# Lydian</option>
+                    <option value="F#|mixolydian">F# Mixolydian</option>
+                    <option value="F#|locrian">F# Locrian</option>
+                    <option value="G|dorian">G Dorian</option>
+                    <option value="G|phrygian">G Phrygian</option>
+                    <option value="G|lydian">G Lydian</option>
+                    <option value="G|mixolydian">G Mixolydian</option>
+                    <option value="G|locrian">G Locrian</option>
+                    <option value="Ab|dorian">Ab Dorian</option>
+                    <option value="Ab|phrygian">Ab Phrygian</option>
+                    <option value="Ab|lydian">Ab Lydian</option>
+                    <option value="Ab|mixolydian">Ab Mixolydian</option>
+                    <option value="Ab|locrian">Ab Locrian</option>
+                    <option value="A|dorian">A Dorian</option>
+                    <option value="A|phrygian">A Phrygian</option>
+                    <option value="A|lydian">A Lydian</option>
+                    <option value="A|mixolydian">A Mixolydian</option>
+                    <option value="A|locrian">A Locrian</option>
+                    <option value="Bb|dorian">Bb Dorian</option>
+                    <option value="Bb|phrygian">Bb Phrygian</option>
+                    <option value="Bb|lydian">Bb Lydian</option>
+                    <option value="Bb|mixolydian">Bb Mixolydian</option>
+                    <option value="Bb|locrian">Bb Locrian</option>
+                    <option value="B|dorian">B Dorian</option>
+                    <option value="B|phrygian">B Phrygian</option>
+                    <option value="B|lydian">B Lydian</option>
+                    <option value="B|mixolydian">B Mixolydian</option>
+                    <option value="B|locrian">B Locrian</option>
+                </optgroup>
+                <optgroup label="Other Scales">
+                    <option value="C|harmonicMinor">C Harmonic Minor</option>
+                    <option value="C|melodicMinor">C Melodic Minor</option>
+                    <option value="C|majorPentatonic">C Major Pentatonic</option>
+                    <option value="C|minorPentatonic">C Minor Pentatonic</option>
+                    <option value="C|blues">C Blues</option>
+                    <option value="C#|harmonicMinor">C# Harmonic Minor</option>
+                    <option value="C#|melodicMinor">C# Melodic Minor</option>
+                    <option value="C#|majorPentatonic">C# Major Pentatonic</option>
+                    <option value="C#|minorPentatonic">C# Minor Pentatonic</option>
+                    <option value="C#|blues">C# Blues</option>
+                    <option value="D|harmonicMinor">D Harmonic Minor</option>
+                    <option value="D|melodicMinor">D Melodic Minor</option>
+                    <option value="D|majorPentatonic">D Major Pentatonic</option>
+                    <option value="D|minorPentatonic">D Minor Pentatonic</option>
+                    <option value="D|blues">D Blues</option>
+                    <option value="Eb|harmonicMinor">Eb Harmonic Minor</option>
+                    <option value="Eb|melodicMinor">Eb Melodic Minor</option>
+                    <option value="Eb|majorPentatonic">Eb Major Pentatonic</option>
+                    <option value="Eb|minorPentatonic">Eb Minor Pentatonic</option>
+                    <option value="Eb|blues">Eb Blues</option>
+                    <option value="E|harmonicMinor">E Harmonic Minor</option>
+                    <option value="E|melodicMinor">E Melodic Minor</option>
+                    <option value="E|majorPentatonic">E Major Pentatonic</option>
+                    <option value="E|minorPentatonic">E Minor Pentatonic</option>
+                    <option value="E|blues">E Blues</option>
+                    <option value="F|harmonicMinor">F Harmonic Minor</option>
+                    <option value="F|melodicMinor">F Melodic Minor</option>
+                    <option value="F|majorPentatonic">F Major Pentatonic</option>
+                    <option value="F|minorPentatonic">F Minor Pentatonic</option>
+                    <option value="F|blues">F Blues</option>
+                    <option value="F#|harmonicMinor">F# Harmonic Minor</option>
+                    <option value="F#|melodicMinor">F# Melodic Minor</option>
+                    <option value="F#|majorPentatonic">F# Major Pentatonic</option>
+                    <option value="F#|minorPentatonic">F# Minor Pentatonic</option>
+                    <option value="F#|blues">F# Blues</option>
+                    <option value="G|harmonicMinor">G Harmonic Minor</option>
+                    <option value="G|melodicMinor">G Melodic Minor</option>
+                    <option value="G|majorPentatonic">G Major Pentatonic</option>
+                    <option value="G|minorPentatonic">G Minor Pentatonic</option>
+                    <option value="G|blues">G Blues</option>
+                    <option value="Ab|harmonicMinor">Ab Harmonic Minor</option>
+                    <option value="Ab|melodicMinor">Ab Melodic Minor</option>
+                    <option value="Ab|majorPentatonic">Ab Major Pentatonic</option>
+                    <option value="Ab|minorPentatonic">Ab Minor Pentatonic</option>
+                    <option value="Ab|blues">Ab Blues</option>
+                    <option value="A|harmonicMinor">A Harmonic Minor</option>
+                    <option value="A|melodicMinor">A Melodic Minor</option>
+                    <option value="A|majorPentatonic">A Major Pentatonic</option>
+                    <option value="A|minorPentatonic">A Minor Pentatonic</option>
+                    <option value="A|blues">A Blues</option>
+                    <option value="Bb|harmonicMinor">Bb Harmonic Minor</option>
+                    <option value="Bb|melodicMinor">Bb Melodic Minor</option>
+                    <option value="Bb|majorPentatonic">Bb Major Pentatonic</option>
+                    <option value="Bb|minorPentatonic">Bb Minor Pentatonic</option>
+                    <option value="Bb|blues">Bb Blues</option>
+                    <option value="B|harmonicMinor">B Harmonic Minor</option>
+                    <option value="B|melodicMinor">B Melodic Minor</option>
+                    <option value="B|majorPentatonic">B Major Pentatonic</option>
+                    <option value="B|minorPentatonic">B Minor Pentatonic</option>
+                    <option value="B|blues">B Blues</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <p id="scaleDisplay" style="font-size: 14px; color: #444444; margin-top: 5px;">AUDIO TERKALIBRASI DI SCALE: <span style="color: #111111; font-weight: bold;">C MAJOR</span></p>
+        <p id="roundInfo">RONDE: 0 | PROGRESI UNIK TERMAINKAN: 0</p>
+        <button class="btn" id="startBtn" style="width: 100%; margin-top: 15px;" onclick="startRound()">MULAI UJIAN (NYALAKAN SPEAKER)</button>
+        <div id="status">Sistem Standby. Tekan mulai.</div>
+        <div id="feedback">Layar Evaluasi</div>
+
+        <div class="numpad">
+            <button class="btn num-btn" onclick="checkAnswer(1)" disabled>1</button><button class="btn num-btn" onclick="checkAnswer(2)" disabled>2</button><button class="btn num-btn" onclick="checkAnswer(3)" disabled>3</button><button class="btn num-btn" onclick="checkAnswer(4)" disabled>4</button><button class="btn num-btn" onclick="checkAnswer(5)" disabled>5</button><button class="btn num-btn" onclick="checkAnswer(6)" disabled>6</button><button class="btn num-btn" onclick="checkAnswer(7)" style="grid-column: span 3;" disabled>7</button>
+        </div>
+
+        <div id="scoreBoard">SKOR TOTAL: <span id="score" class="highlight-score">0</span> &nbsp;|&nbsp; LATENCY: <span id="latency">-</span> ms</div>
+        <button class="action-btn" id="finishBtn" onclick="finishTest()">AKHIRI TES & SIMPAN HASIL</button>
+
+        <div id="resultPanel">
+            <h2>HASIL AKHIR HFT</h2>
+            <div class="result-row"><span>Skor total</span><span class="result-value" id="finalScore">0</span></div>
+            <div class="result-row"><span>Jumlah ronde selesai</span><span class="result-value" id="finalRounds">0</span></div>
+            <div class="result-row"><span>Total chord dijawab</span><span class="result-value" id="finalQuestions">0</span></div>
+            <div class="result-row"><span>Jawaban benar</span><span class="result-value" id="finalCorrect">0</span></div>
+            <div class="result-row"><span>Akurasi jawaban</span><span class="result-value" id="finalAccuracy">0%</span></div>
+            <div class="result-row"><span>Rata-rata latency</span><span class="result-value" id="finalLatency">-</span></div>
+            <div class="result-row"><span>Band score</span><span class="result-value" id="bandScore">0</span></div>
+            <div class="result-row"><span>Kategori</span><span class="result-value" id="bandLabel">-</span></div>
+            <p id="saveStatus">Hasil tes tersimpan.</p>
+        </div>
+    </div>
+
+    <script src="progress.js.html"></script>
+    <script>
+        function closeTutorial() { document.getElementById('tutorialOverlay').style.display = 'none'; }
+        function openTutorial() { document.getElementById('tutorialOverlay').style.display = 'flex'; }
+
+        const TRANSITIONS = {
+            1: {2:2,3:1,4:4,5:4,6:3,7:0.3}, 2: {1:0.5,3:0.5,4:1,5:5,6:1,7:1},
+            3: {1:0.5,2:1,4:3,5:1,6:4,7:0.3}, 4: {1:3,2:2,3:0.5,5:4,6:1.5,7:1},
+            5: {1:5,2:0.5,3:1,4:1.5,6:3,7:0.3}, 6: {1:1,2:3,3:1,4:4,5:3,7:0.3},
+            7: {1:4,2:0.5,3:3,4:0.5,5:0.5,6:0.5}
+        };
+        const START_WEIGHTS = {1:4,2:2,3:2,4:3,5:2,6:3,7:0.3};
+        const CHAOS = 0.4;
+
+        function pickWeighted(weights) {
+            const keys = Object.keys(weights);
+            const adjusted = keys.map(k => weights[k] + Math.random() * CHAOS);
+            let total = adjusted.reduce((a,b) => a+b, 0);
+            let r = Math.random() * total;
+            for (let i=0; i<keys.length; i++) { r -= adjusted[i]; if (r <= 0) return parseInt(keys[i]); }
+            return parseInt(keys[keys.length-1]);
+        }
+        function buildProgression(length) {
+            const prog = [pickWeighted(START_WEIGHTS)];
+            while (prog.length < length) prog.push(pickWeighted(TRANSITIONS[prog[prog.length-1]]));
+            return prog;
+        }
+
+        // Riwayat progresi unik disimpan lintas reload dan dibedakan berdasarkan scale.
+        const STORAGE_KEY = 'hft_seen_progressions_v2';
+        let seen = new Set();
+        try { seen = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')); } catch(e) { seen = new Set(); }
+        function saveSeen() {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(seen))); } catch(e) {}
+        }
+        function lengthForRound(ronde) {
+            const minLen = Math.min(4 + Math.floor((ronde - 1) / 5), 8);
+            return minLen + Math.floor(Math.random() * 3);
+        }
+        function generateUniqueProgression(ronde) {
+            let length = lengthForRound(ronde);
+            // Progresi unik bersifat global untuk semua key/scale.
+            while (true) {
+                for (let attempt = 0; attempt < 2000; attempt++) {
+                    const prog = buildProgression(length);
+                    const key = prog.join('-');
+                    if (!seen.has(key)) { seen.add(key); saveSeen(); return prog; }
+                }
+                length++;
+            }
+        }
+
+        const appreciations = ["GOKIL!","SEMPURNA!","TRANSISI MULUS!","REFLEKS DEWA!"];
+        const RESULTS_STORAGE_KEY = 'hft_test_results';
+        let currentProgression = [], currentStep = 0, score = 0, ronde = 0, startTime = 0;
+        let isPlaying = false, canAnswer = false, testFinished = false;
+        let totalQuestions = 0, correctAnswers = 0, totalLatency = 0, completedRounds = 0;
+
+        const NOTE_NAMES = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
+        const SCALE_INTERVALS = {
+            major:[0,2,4,5,7,9,11], minor:[0,2,3,5,7,8,10],
+            dorian:[0,2,3,5,7,9,10], phrygian:[0,1,3,5,7,8,10],
+            lydian:[0,2,4,6,7,9,11], mixolydian:[0,2,4,5,7,9,10],
+            locrian:[0,1,3,5,6,8,10], harmonicMinor:[0,2,3,5,7,8,11],
+            melodicMinor:[0,2,3,5,7,9,11], majorPentatonic:[0,2,4,7,9],
+            minorPentatonic:[0,3,5,7,10], blues:[0,3,5,6,7,10]
+        };
+        let selectedRoot = "C", selectedScale = "major", CHORD_NOTES = {};
+
+        function midiNote(midi) { return Tone.Frequency(midi, "midi").toNote(); }
+        function generateScaleChords() {
+            const rootIndex = NOTE_NAMES.indexOf(selectedRoot);
+            const intervals = SCALE_INTERVALS[selectedScale];
+            CHORD_NOTES = {};
+
+            // Build triads by stacking scale thirds. Wrap into the next octave when needed.
+            function scaleOffset(degreeIndex) {
+                const octave = Math.floor(degreeIndex / intervals.length);
+                const index = degreeIndex % intervals.length;
+                return intervals[index] + (octave * 12);
+            }
+
+            for (let degree = 0; degree < 7; degree++) {
+                const root = 48 + rootIndex + scaleOffset(degree);
+                const third = 48 + rootIndex + scaleOffset(degree + 2);
+                const fifth = 48 + rootIndex + scaleOffset(degree + 4);
+                CHORD_NOTES[degree + 1] = [
+                    midiNote(root),
+                    midiNote(root + 12),
+                    midiNote(third + 12),
+                    midiNote(fifth + 12)
+                ];
+            }
+        }
+        function changeScale() {
+            if (isPlaying || testFinished) {
+                document.getElementById('scaleSelect').value = selectedRoot + '|' + selectedScale;
+                return;
+            }
+            const parts = document.getElementById('scaleSelect').value.split('|');
+            selectedRoot = parts[0]; selectedScale = parts[1];
+            generateScaleChords();
+            const label = document.getElementById('scaleSelect').selectedOptions[0].text;
+            document.querySelector('#scaleDisplay span').innerText = label;
+            document.getElementById('status').innerText = 'KEY AKTIF: ' + label;
+            document.getElementById('feedback').innerText = 'Scale berhasil diganti. Tekan mulai untuk bermain.';
+        }
+        generateScaleChords();
+        function updateRoundInfo() {
+            document.getElementById('roundInfo').innerText = 'RONDE: ' + ronde + ' | PROGRESI UNIK TERMAINKAN: ' + seen.size;
+        }
+        updateRoundInfo();
+
+        document.addEventListener('keydown', function(event) {
+            if (isPlaying && canAnswer && event.key >= '1' && event.key <= '7') checkAnswer(parseInt(event.key));
+        });
+        function toggleButtons(state) {
+            canAnswer = state;
+            document.querySelectorAll('.num-btn').forEach(btn => btn.disabled = !state);
+        }
+
+
+        let pianoLoaded = false;
+        const piano = new Tone.Sampler({
+            urls: {
+                "C2":"C2.mp3","D#2":"Ds2.mp3","F#2":"Fs2.mp3","A2":"A2.mp3",
+                "C3":"C3.mp3","D#3":"Ds3.mp3","F#3":"Fs3.mp3","A3":"A3.mp3",
+                "C4":"C4.mp3","D#4":"Ds4.mp3","F#4":"Fs4.mp3","A4":"A4.mp3",
+                "C5":"C5.mp3","D#5":"Ds5.mp3","F#5":"Fs5.mp3","A5":"A5.mp3"
+            },
+            release: 1.2,
+            baseUrl: "https://tonejs.github.io/audio/salamander/",
+            onload: function() {
+                pianoLoaded = true;
+            }
+        }).toDestination();
+
+        // Audio cadangan agar chord tetap berbunyi jika sampel piano gagal dimuat.
+        const fallbackSynth = new Tone.PolySynth(Tone.Synth, {
+            oscillator: { type: "triangle" },
+            envelope: {
+                attack: 0.02,
+                decay: 0.25,
+                sustain: 0.35,
+                release: 1.0
+            }
+        }).toDestination();
+
+        fallbackSynth.volume.value = -8;
+
+        async function playChordSound(chordNumber) {
+            const notes = CHORD_NOTES[chordNumber];
+            if (!notes) return;
+
+            try {
+                await Tone.start();
+
+                const audioContext = Tone.getContext().rawContext;
+                if (audioContext.state === "suspended") {
+                    await audioContext.resume();
+                }
+
+                if (pianoLoaded) {
+                    piano.releaseAll();
+                    piano.triggerAttackRelease(notes, 1.8);
+                } else {
+                    fallbackSynth.releaseAll();
+                    fallbackSynth.triggerAttackRelease(notes, 1.8);
+                }
+            } catch (error) {
+                try {
+                    fallbackSynth.triggerAttackRelease(notes, 1.8);
+                } catch (fallbackError) {
+                    document.getElementById("feedback").innerText =
+                        "Audio gagal diputar. Coba tekan MULAI lagi dan periksa volume perangkat.";
+                    console.error("Audio playback error:", error, fallbackError);
+                }
+            }
+        }
+        async function startRound() {
+            if (testFinished || isPlaying) return;
+
+            const startButton = document.getElementById("startBtn");
+            startButton.disabled = true;
+            document.getElementById("status").innerText = "Menyiapkan audio...";
+
+            try {
+                // Mengaktifkan audio melalui interaksi langsung pengguna.
+                await Tone.start();
+
+                const audioContext = Tone.getContext().rawContext;
+                if (audioContext.state === "suspended") {
+                    await audioContext.resume();
+                }
+            } catch (error) {
+                console.error("Audio context gagal dimulai:", error);
+            }
+
+            startButton.disabled = false;
+            document.getElementById("startBtn").style.display = "none";
+            document.getElementById("finishBtn").style.display = "none";
+            document.getElementById("resultPanel").style.display = "none";
+
+            ronde++;
+            currentProgression = generateUniqueProgression(ronde);
+            currentStep = 0;
+            isPlaying = true;
+
+            updateRoundInfo();
+
+            document.getElementById("status").innerHTML =
+                "KEY AKTIF: <span>" + selectedRoot + " " + selectedScale + "</span>";
+
+            document.getElementById("feedback").innerHTML =
+                "Ronde " + ronde + ": " + currentProgression.length +
+                " chord. Bersiap mendengarkan chord pertama...";
+
+            toggleButtons(true);
+            setTimeout(nextChord, 1200);
+        }
+        function nextChord() {
+            if (currentStep >= currentProgression.length) {
+                document.getElementById('status').innerHTML = '<span>RONDE SELESAI!</span>';
+                document.getElementById('feedback').innerHTML = 'Progresi selesai. Lo bisa lanjut ke progresi baru atau akhiri tes untuk menyimpan hasil akhir.';
+                document.getElementById('startBtn').style.display = 'block';
+                document.getElementById('startBtn').innerText = 'LANJUT PROGRESI BARU';
+                document.getElementById('finishBtn').style.display = 'block';
+                toggleButtons(false); isPlaying = false; completedRounds++;
+                return;
+            }
+            const targetChord = currentProgression[currentStep];
+            document.getElementById('status').innerHTML = '<span>MENEBak CHORD KE-' + (currentStep+1) + ' DARI ' + currentProgression.length + '...</span>';
+            playChordSound(targetChord);
+            startTime = Date.now();
+        }
+        function getEvaluation(user, correct) {
+            const minor = [2,3,6], major = [1,4,5];
+            if (minor.includes(correct) && major.includes(user)) return 'Lo nebak Major (terang), padahal aslinya minor (gelap).';
+            if (major.includes(correct) && minor.includes(user)) return 'Lo nebak minor, padahal aslinya Major (megah).';
+            if (correct === 5 && user === 4) return 'Kejebak! Chord 5 pengen resolve ke 1. Chord 4 cuma numpang lewat.';
+            return 'Fokus dengarkan nada BASS paling bawah untuk menebak ROOT-nya.';
+        }
+        function checkAnswer(userAnswer) {
+            if (!isPlaying || !canAnswer || testFinished) return;
+            const reactionTime = Date.now() - startTime;
+            const correctAnswer = currentProgression[currentStep];
+            const feedbackEl = document.getElementById('feedback');
+            totalQuestions++; totalLatency += reactionTime;
+            if (userAnswer === correctAnswer) {
+                correctAnswers++;
+                let points = 100, penaltyText = '';
+                if (reactionTime > 1500) { points -= 40; penaltyText = '<br><span style="color:#444444; font-size:14px;">(TELAT MIKIR! POIN DIKURANGI 40)</span>'; }
+                score += points;
+                const randomAppreciation = appreciations[Math.floor(Math.random()*appreciations.length)];
+                feedbackEl.innerHTML = '<span style="color:#16803c; font-weight:900; font-size:18px;">' + randomAppreciation + ' TEPAT! +' + points + '</span> ' + penaltyText;
+            } else {
+                feedbackEl.innerHTML = '✗ <span style="color:#d11a2a; font-size:18px; font-weight:900;">SALAH! HARUSNYA CHORD ' + correctAnswer + '.</span><br><span style="color:#333333; font-size:14px;">EVALUASI: ' + getEvaluation(userAnswer, correctAnswer) + '</span>';
+            }
+            document.getElementById('score').innerText = score;
+            document.getElementById('latency').innerText = reactionTime;
+            currentStep++; toggleButtons(false);
+            setTimeout(() => { if (testFinished) return; toggleButtons(true); nextChord(); }, 2000);
+        }
+        function calculateBandScore() {
+            if (totalQuestions === 0) return {score:0,label:'Belum ada data'};
+            const band = Math.round(score / totalQuestions);
+            let label;
+            if (band >= 90) label = 'Excellent'; else if (band >= 75) label = 'Good'; else if (band >= 60) label = 'Developing'; else label = 'Beginner';
+            return {score:band,label:label};
+        }
+        function finishTest() {
+            if (testFinished || isPlaying || totalQuestions === 0) return;
+            testFinished = true; toggleButtons(false);
+            const accuracy = totalQuestions > 0 ? Math.round((correctAnswers/totalQuestions)*100) : 0;
+            const averageLatency = totalQuestions > 0 ? Math.round(totalLatency/totalQuestions) : 0;
+            const band = calculateBandScore();
+            const result = {testName:'Harmonic Fluency Test - Section A',finalScore:score,bandScore:band.score,bandLabel:band.label,completedRounds:completedRounds,totalQuestions:totalQuestions,correctAnswers:correctAnswers,accuracy:accuracy,averageLatency:averageLatency,date:new Date().toISOString()};
+            let savedSuccessfully = false;
+            try {
+                const previousResults = JSON.parse(localStorage.getItem(RESULTS_STORAGE_KEY) || '[]');
+                previousResults.push(result); localStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(previousResults)); savedSuccessfully = true;
+            } catch(e) { console.error('Hasil tes gagal disimpan:', e); }
+            let trackerSavedSuccessfully = false;
+            try {
+                if (window.TSW && typeof window.TSW.save === 'function') { window.TSW.save('listening', correctAnswers, totalQuestions); trackerSavedSuccessfully = true; }
+                else console.error('TSW.save tidak ditemukan. Periksa file progress.js.html.');
+            } catch(e) { console.error('Gagal menyimpan Progress Tracker:', e); }
+            document.getElementById('finalScore').innerText = result.finalScore;
+            document.getElementById('finalRounds').innerText = result.completedRounds;
+            document.getElementById('finalQuestions').innerText = result.totalQuestions;
+            document.getElementById('finalCorrect').innerText = result.correctAnswers;
+            document.getElementById('finalAccuracy').innerText = result.accuracy + '%';
+            document.getElementById('finalLatency').innerText = result.averageLatency + ' ms';
+            document.getElementById('bandScore').innerText = result.bandScore + ' / 100';
+            document.getElementById('bandLabel').innerText = result.bandLabel;
+            document.getElementById('saveStatus').innerText = trackerSavedSuccessfully ? 'Hasil tes berhasil disimpan ke Progress Tracker.' : savedSuccessfully ? 'Skor tersimpan, tetapi Progress Tracker belum berhasil diperbarui. Periksa progress.js.html.' : 'Gagal menyimpan hasil tes.';
+            document.getElementById('status').innerText = 'TES SELESAI!';
+            document.getElementById('feedback').innerText = 'Hasil akhir tes lo sudah ditampilkan di bawah.';
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('finishBtn').style.display = 'none';
+            document.getElementById('resultPanel').style.display = 'block';
+            document.getElementById('score').innerText = score;
+        }
+    </script>
+</body>
+</html>

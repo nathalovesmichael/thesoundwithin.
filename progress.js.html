@@ -1,0 +1,120 @@
+/* THE SOUND WITHIN — progress.js.html
+   Isi file ini JavaScript murni, jangan dibungkus tag HTML atau <script>. */
+(function () {
+var KEY = "tsw_progress_v1";
+var KEY_USER = "tsw_user_v1";
+var SKILLS = ["reading", "listening", "speaking"];
+var NAMA = { reading: "Reading", listening: "Listening", speaking: "Speaking" };
+
+function getUser() { try { return JSON.parse(localStorage.getItem(KEY_USER)); } catch (e) { return null; } }
+function setUser(name, date) { try { localStorage.setItem(KEY_USER, JSON.stringify({ name: name, date: date })); } catch (e) {} }
+
+function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+function store(data) { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+
+function roundHalf(x) { return Math.round(x * 2) / 2; }
+function toBand(pct) { return roundHalf(pct / 100 * 9); }
+
+function label(b) {
+if (b >= 8) return "Expert";
+if (b >= 7) return "Good";
+if (b >= 6) return "Competent";
+if (b >= 5) return "Modest";
+if (b >= 4) return "Limited";
+return "Beginner";
+}
+
+function overall(data) {
+var vals = [];
+SKILLS.forEach(function (s) { if (data[s] && data[s].last) vals.push(data[s].last.band); });
+if (!vals.length) return null;
+var sum = vals.reduce(function (a, b) { return a + b; }, 0);
+return { band: roundHalf(sum / vals.length), count: vals.length };
+}
+
+function pasangStyle() {
+if (document.getElementById("tsw-band-style")) return;
+var st = document.createElement("style");
+st.id = "tsw-band-style";
+st.textContent =
+".tsw-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;padding:20px;font-family:'Segoe UI',Arial,sans-serif;}" +
+".tsw-box{background:#121212;color:#f8f8f5;border:1px solid #444;border-radius:8px;max-width:400px;width:100%;padding:32px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);}" +
+".tsw-eyebrow{color:#a5a5a0;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0;}" +
+".tsw-name{color:#d8d8d3;font-size:13px;margin:8px 0 0;}" +
+".tsw-band{font-family:Georgia,'Times New Roman',serif;font-size:96px;line-height:1;letter-spacing:-4px;margin:14px 0 4px;}" +
+".tsw-label{color:#d8d8d3;font-size:15px;margin:0 0 14px;}" +
+".tsw-detail{color:#a5a5a0;font-size:13px;line-height:1.6;margin:0 0 6px;}" +
+".tsw-overall{margin:18px 0 0;padding-top:16px;border-top:1px solid #333;color:#d8d8d3;font-size:13px;}" +
+".tsw-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px;}" +
+".tsw-btn{font:inherit;font-size:13px;font-weight:700;padding:11px 18px;border-radius:4px;border:1px solid #f8f8f5;background:#f8f8f5;color:#080808;cursor:pointer;text-decoration:none;}" +
+".tsw-btn.ghost{background:transparent;color:#f8f8f5;border-color:#555550;}";
+document.head.appendChild(st);
+}
+
+function tampilkanBand(skill, hasil, ov) {
+setTimeout(function () {
+pasangStyle();
+var lama = document.getElementById("tsw-band-overlay");
+if (lama) lama.remove();
+
+var teksOverall = "";
+if (ov) {
+teksOverall = ov.count >= SKILLS.length
+? "Overall Band Score: <strong>" + ov.band.toFixed(1) + "</strong>"
+: "Overall Band sementara: <strong>" + ov.band.toFixed(1) + "</strong> (" + ov.count + " dari " + SKILLS.length + " tes selesai)";
+}
+
+var u = getUser();
+var namaHtml = (u && u.name) ? '<p class="tsw-name"></p>' : "";
+
+var o = document.createElement("div");
+o.id = "tsw-band-overlay";
+o.className = "tsw-overlay";
+o.innerHTML =
+'<div class="tsw-box">' +
+'<p class="tsw-eyebrow">BAND SCORE · ' + NAMA[skill].toUpperCase() + '</p>' +
+namaHtml +
+'<div class="tsw-band">' + hasil.band.toFixed(1) + '</div>' +
+'<p class="tsw-label">' + label(hasil.band) + '</p>' +
+'<p class="tsw-detail">' + hasil.benar + ' dari ' + hasil.total + ' benar (' + hasil.pct + '%)</p>' +
+'<p class="tsw-overall">' + teksOverall + '</p>' +
+'<div class="tsw-actions">' +
+'<a class="tsw-btn" href="website.html#progress">Lihat Progress</a>' +
+'<button class="tsw-btn ghost" type="button" id="tsw-close">Tutup</button>' +
+'</div>' +
+'</div>';
+document.body.appendChild(o);
+
+var n = o.querySelector(".tsw-name");
+if (n && u) n.textContent = u.name;
+
+document.getElementById("tsw-close").onclick = function () { o.remove(); };
+o.addEventListener("click", function (e) { if (e.target === o) o.remove(); });
+}, 600);
+}
+
+function save(skill, benar, total) {
+if (SKILLS.indexOf(skill) === -1 || !total) return null;
+var data = load();
+var pct = Math.round(benar / total * 100);
+var band = toBand(pct);
+var rec = data[skill] || { attempts: 0, best: null, last: null };
+rec.attempts += 1;
+rec.last = { benar: benar, total: total, pct: pct, band: band, date: new Date().toISOString() };
+if (!rec.best || band > rec.best.band || (band === rec.best.band && pct > rec.best.pct)) rec.best = rec.last;
+data[skill] = rec;
+store(data);
+tampilkanBand(skill, rec.last, overall(data));
+return rec.last;
+}
+
+function reset() {
+try { localStorage.removeItem(KEY); localStorage.removeItem(KEY_USER); } catch (e) {}
+}
+
+window.TSW = {
+SKILLS: SKILLS, NAMA: NAMA,
+load: load, save: save, reset: reset, overall: overall, toBand: toBand, label: label,
+getUser: getUser, setUser: setUser
+};
+})();

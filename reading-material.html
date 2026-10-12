@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>Harmonic Reading Material - Hub</title>
+
+<style>
+*{box-sizing:border-box}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#080808;color:#f8f8f5;margin:0;padding:24px 14px;text-align:center;line-height:1.7}
+.screen{background:#121212;border:1px solid #333330;border-radius:8px;padding:36px 26px;max-width:800px;margin:0 auto;text-align:left}
+h1{color:#fff;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:30px;text-align:center;text-transform:uppercase;margin-top:0;letter-spacing:-.5px}
+h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:21px;color:#f8f8f5;border-bottom:1px dashed #555;padding-bottom:8px;margin-top:0}
+p,li{font-size:15px;line-height:1.7;color:#bcbcb6}
+b{color:#f8f8f5}
+.material-box{background:#0b0b0b;border:1px solid #303030;border-radius:10px;padding:20px;margin-top:18px}
+.diagram{background:#fff;border:2px solid #555;border-radius:10px;padding:10px;margin:14px 0 6px;text-align:center;overflow-x:auto}
+.diagram svg{max-width:100%;height:auto}
+.caption{font-size:13px;color:#a5a5a0;font-style:italic;text-align:center;margin:4px 0 14px}
+.diagram .error{color:#b91c1c;font-weight:700;font-size:14px}
+.flow{display:flex;align-items:stretch;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
+.flow-box{flex:1 1 150px;border-radius:10px;padding:12px 10px;text-align:center;font-size:13px;line-height:1.5;border:1px solid #888;color:#f8f8f5}
+.flow-box b{display:block;font-size:15px;margin-bottom:4px}
+.flow-tonic{background:#262626;border-color:#f8f8f5}
+.flow-sub{background:#181818;border-color:#888}
+.flow-dom{background:#202020;border-color:#bbb}
+.flow-arrow{align-self:center;font-size:24px;font-weight:900;color:#f8f8f5}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:30px;gap:10px;flex-wrap:wrap}
+.btn{background:transparent;border:1px solid #555;color:#fff;padding:12px 18px;font-size:14px;font-weight:700;border-radius:4px;cursor:pointer;text-decoration:none;transition:.2s;font-family:inherit}
+.btn:hover{background:#f8f8f5;color:#080808;border-color:#f8f8f5}
+.btn-primary{background:#f8f8f5;color:#080808;border-color:#f8f8f5}
+.btn-primary:hover{background:#d8d8d3;color:#000}
+</style>
+</head>
+
+<body>
+<div class="screen">
+<h1>Materi: Baca Not &amp; Harmoni Dasar</h1>
+
+<p style="text-align:center;color:#a5a5a0;margin-top:0">Panduan visual membaca not balok, tuts piano, dan family chord di C Major</p>
+
+<div class="material-box">
+<h2>1. Cara Membaca Paranada (Tuts Putih)</h2>
+
+<p>Paranada punya 5 garis dan 4 spasi. Posisi not di garis atau spasi menentukan namanya. Ada dua kunci yang dipakai di tes: <b>kunci G (treble)</b> untuk nada tinggi dan <b>kunci F (bass)</b> untuk nada rendah.</p>
+
+<div class="diagram" id="dTrebleLines"></div>
+<div class="caption">Kunci G, not di garis dari bawah ke atas: E G B D F</div>
+
+<div class="diagram" id="dTrebleSpaces"></div>
+<div class="caption">Kunci G, not di spasi dari bawah ke atas: F A C E</div>
+
+<div class="diagram" id="dBassLines"></div>
+<div class="caption">Kunci F, not di garis dari bawah ke atas: G B D F A</div>
+
+<div class="diagram" id="dBassSpaces"></div>
+<div class="caption">Kunci F, not di spasi dari bawah ke atas: A C E G</div>
+
+<p>Not yang jatuh di luar lima garis ditulis dengan <b>garis bantu (ledger line)</b>. Cara bacanya, hitung dari garis atau spasi terdekat, naik atau turun satu nama not setiap pindah garis ke spasi.</p>
+</div>
+
+<div class="material-box">
+<h2>2. Tangga Nada C Major dan Nomor Famchord</h2>
+
+<p>C Major hanya memakai tuts putih. Setiap nada punya nomor urut yang dipakai sebagai nama famchord: C = 1, D = 2, E = 3, F = 4, G = 5, A = 6, B = 7.</p>
+
+<div class="diagram" id="dScale"></div>
+<div class="caption">Tangga nada C Major di kunci G, tulisan di bawah not: nama nada dan nomor famchord</div>
+
+<div class="diagram" id="dPiano"></div>
+<div class="caption">Posisi nada yang sama di tuts piano. Tuts abu-abu adalah chord C Major (C, E, G)</div>
+</div>
+
+<div class="material-box">
+<h2>3. Family Chord C Major</h2>
+
+<p>Di dalam kunci <b>C Major</b>, terdapat 7 chord diatonis. Masing-masing dibangun dengan menumpuk tiga nada selang satu (1 - 3 - 5) dari nada dasarnya.</p>
+
+<div class="diagram" id="dChords"></div>
+<div class="caption">Tujuh chord di C Major dalam bentuk not balok</div>
+
+<ul>
+<li><b>1 - C Major:</b> Tonic (rumah, titik stabil utama)</li>
+<li><b>2 - D minor:</b> Supertonic (minor, transisi menuju dominan)</li>
+<li><b>3 - E minor:</b> Mediant (minor, warna harmonik lembut)</li>
+<li><b>4 - F Major:</b> Subdominant (kesan menjauh dari rumah)</li>
+<li><b>5 - G Major:</b> Dominant (tegangan tinggi, ingin pulang ke 1)</li>
+<li><b>6 - A minor:</b> Submediant (relatif minor dari C)</li>
+<li><b>7 - B diminished:</b> Leading tone (sangat tidak stabil, butuh resolusi)</li>
+</ul>
+</div>
+
+<div class="material-box">
+<h2>4. Alur Fungsi Harmoni</h2>
+
+<p>Setiap chord punya fungsi. Lagu biasanya bergerak dari rumah, pergi menjauh, membangun tegangan, lalu pulang.</p>
+
+<div class="flow">
+<div class="flow-box flow-tonic"><b>TONIC</b>1 (C), 6 (Am), 3 (Em)<br>Rumah, stabil</div>
+<div class="flow-arrow">→</div>
+<div class="flow-box flow-sub"><b>SUBDOMINANT</b>4 (F), 2 (Dm)<br>Pergi menjauh</div>
+<div class="flow-arrow">→</div>
+<div class="flow-box flow-dom"><b>DOMINANT</b>5 (G), 7 (Bdim)<br>Tegangan tinggi</div>
+<div class="flow-arrow">→</div>
+<div class="flow-box flow-tonic"><b>TONIC</b>1 (C)<br>Pulang, lega</div>
+</div>
+
+<div class="caption">Pola alur: Tonic, Subdominant, Dominant, kembali ke Tonic</div>
+</div>
+
+<div class="material-box">
+<h2>5. Pola Progresi Umum (ii - V - I)</h2>
+
+<p>Progresi <b>Dm7 - G7 - Cmaj7</b> adalah standar emas di musik populer dan jazz. Akar nadanya bergerak turun selang lima (D ke G ke C), dan pergerakan ini terasa sangat natural di telinga.</p>
+
+<div class="diagram" id="dTwoFiveOne"></div>
+<div class="caption">Progresi ii - V - I di C Major</div>
+</div>
+
+<div class="nav-buttons">
+<a href="website.html" class="btn">← Home</a>
+<a href="website.html#reading-test" class="btn btn-primary">🎼 Reading Test Not Balok →</a>
+</div>
+</div>
+
+<script>
+const SUMBER_VEXFLOW = [
+'https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js',
+'https://unpkg.com/vexflow@4.2.2/build/cjs/vexflow.js'
+];
+
+function muatVexFlow(i) {
+if (typeof Vex !== 'undefined') { gambarSemua(); return; }
+if (i >= SUMBER_VEXFLOW.length) { tampilkanError(); return; }
+const s = document.createElement('script');
+s.src = SUMBER_VEXFLOW[i];
+s.onload = gambarSemua;
+s.onerror = function () { muatVexFlow(i + 1); };
+document.head.appendChild(s);
+}
+
+function tampilkanError() {
+document.querySelectorAll('.diagram').forEach(function (d) {
+if (!d.querySelector('svg')) {
+d.innerHTML = '<span class="error">Diagram gagal dimuat. Cek koneksi internet lalu refresh halaman.</span>';
+}
+});
+}
+
+const BEATS = { w: 4, h: 2, q: 1 };
+
+function gambarStave(idTarget, clef, spec, lebar, tinggi, yStave) {
+const VF = Vex.Flow;
+const box = document.getElementById(idTarget);
+box.innerHTML = '';
+
+const renderer = new VF.Renderer(box, VF.Renderer.Backends.SVG);
+renderer.resize(lebar + 30, tinggi);
+const ctx = renderer.getContext();
+
+const stave = new VF.Stave(10, yStave, lebar);
+stave.addClef(clef);
+stave.setContext(ctx).draw();
+
+let beats = 0;
+
+const notes = spec.map(function (s) {
+beats += BEATS[s.dur];
+const n = new VF.StaveNote({ clef: clef, keys: s.keys, duration: s.dur });
+if (s.label) {
+const ann = new VF.Annotation(s.label);
+ann.setFont('Arial', 12, 'bold');
+ann.setVerticalJustification(VF.Annotation.VerticalJustify.BOTTOM);
+n.addModifier(ann, 0);
+}
+return n;
+});
+
+const voice = new VF.Voice({ num_beats: beats, beat_value: 4 });
+voice.addTickables(notes);
+new VF.Formatter().joinVoices([voice]).format([voice], lebar - 90);
+voice.draw(ctx, stave);
+}
+
+function gambarPiano(idTarget) {
+const huruf = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'];
+const nomor = [1, 2, 3, 4, 5, 6, 7, 1];
+const sorot = [0, 2, 4];
+
+const lebarKey = 52;
+const tinggiKey = 150;
+const x0 = 20;
+
+let svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + (x0 * 2 + lebarKey * 8) + ' 215" width="' + (x0 * 2 + lebarKey * 8) + '" height="215">';
+
+for (let i = 0; i < 8; i++) {
+const warna = sorot.indexOf(i) !== -1 ? '#bdbdb8' : '#ffffff';
+svg += '<rect x="' + (x0 + i * lebarKey) + '" y="10" width="' + lebarKey + '" height="' + tinggiKey + '" fill="' + warna + '" stroke="#111" stroke-width="2"/>';
+}
+
+[0, 1, 3, 4, 5].forEach(function (i) {
+svg += '<rect x="' + (x0 + (i + 1) * lebarKey - 17) + '" y="10" width="34" height="92" fill="#111" rx="3"/>';
+});
+
+for (let i = 0; i < 8; i++) {
+const cx = x0 + i * lebarKey + lebarKey / 2;
+svg += '<text x="' + cx + '" y="184" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#111">' + huruf[i] + '</text>';
+svg += '<text x="' + cx + '" y="204" text-anchor="middle" font-family="Arial" font-size="13" fill="#555">(' + nomor[i] + ')</text>';
+}
+
+svg += '</svg>';
+document.getElementById(idTarget).innerHTML = svg;
+}
+
+function gambarSemua() {
+gambarStave('dTrebleLines', 'treble', [
+{ keys: ['e/4'], dur: 'q', label: 'E' },
+{ keys: ['g/4'], dur: 'q', label: 'G' },
+{ keys: ['b/4'], dur: 'q', label: 'B' },
+{ keys: ['d/5'], dur: 'q', label: 'D' },
+{ keys: ['f/5'], dur: 'q', label: 'F' }
+], 380, 170, 40);
+
+gambarStave('dTrebleSpaces', 'treble', [
+{ keys: ['f/4'], dur: 'q', label: 'F' },
+{ keys: ['a/4'], dur: 'q', label: 'A' },
+{ keys: ['c/5'], dur: 'q', label: 'C' },
+{ keys: ['e/5'], dur: 'q', label: 'E' }
+], 340, 170, 40);
+
+gambarStave('dBassLines', 'bass', [
+{ keys: ['g/2'], dur: 'q', label: 'G' },
+{ keys: ['b/2'], dur: 'q', label: 'B' },
+{ keys: ['d/3'], dur: 'q', label: 'D' },
+{ keys: ['f/3'], dur: 'q', label: 'F' },
+{ keys: ['a/3'], dur: 'q', label: 'A' }
+], 380, 170, 40);
+
+gambarStave('dBassSpaces', 'bass', [
+{ keys: ['a/2'], dur: 'q', label: 'A' },
+{ keys: ['c/3'], dur: 'q', label: 'C' },
+{ keys: ['e/3'], dur: 'q', label: 'E' },
+{ keys: ['g/3'], dur: 'q', label: 'G' }
+], 340, 170, 40);
+
+gambarStave('dScale', 'treble', [
+{ keys: ['c/4'], dur: 'q', label: 'C (1)' },
+{ keys: ['d/4'], dur: 'q', label: 'D (2)' },
+{ keys: ['e/4'], dur: 'q', label: 'E (3)' },
+{ keys: ['f/4'], dur: 'q', label: 'F (4)' },
+{ keys: ['g/4'], dur: 'q', label: 'G (5)' },
+{ keys: ['a/4'], dur: 'q', label: 'A (6)' },
+{ keys: ['b/4'], dur: 'q', label: 'B (7)' },
+{ keys: ['c/5'], dur: 'q', label: 'C (1)' }
+], 640, 190, 40);
+
+gambarPiano('dPiano');
+
+gambarStave('dChords', 'treble', [
+{ keys: ['c/4', 'e/4', 'g/4'], dur: 'q', label: 'C' },
+{ keys: ['d/4', 'f/4', 'a/4'], dur: 'q', label: 'Dm' },
+{ keys: ['e/4', 'g/4', 'b/4'], dur: 'q', label: 'Em' },
+{ keys: ['f/4', 'a/4', 'c/5'], dur: 'q', label: 'F' },
+{ keys: ['g/4', 'b/4', 'd/5'], dur: 'q', label: 'G' },
+{ keys: ['a/4', 'c/5', 'e/5'], dur: 'q', label: 'Am' },
+{ keys: ['b/4', 'd/5', 'f/5'], dur: 'q', label: 'Bdim' }
+], 640, 190, 40);
+
+gambarStave('dTwoFiveOne', 'treble', [
+{ keys: ['d/4', 'f/4', 'a/4', 'c/5'], dur: 'h', label: 'Dm7 (ii)' },
+{ keys: ['g/4', 'b/4', 'd/5', 'f/5'], dur: 'h', label: 'G7 (V)' },
+{ keys: ['c/4', 'e/4', 'g/4', 'b/4'], dur: 'h', label: 'Cmaj7 (I)' }
+], 460, 190, 40);
+}
+
+muatVexFlow(0);
+</script>
+</body>
+</html>
