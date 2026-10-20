@@ -62,29 +62,28 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-weight: 800;
             letter-spacing: -.5px;
         }
 
         .brand-logo-frame {
-            width: 43px;
-            height: 43px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--white);
+            background: #ffffff;
+            color: #22252A;
+            font-family: var(--serif);
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 0.5px;
             border: 2px solid var(--rosegold);
             box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold);
             flex-shrink: 0;
-        }
-
-        .brand-logo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            user-select: none;
         }
 
         .brand-name { font-size: 19px; line-height: 1.2; }
@@ -437,16 +436,11 @@
 
         #reading-test .main-btn:hover { background: #e3be6d; }
         #reading-test .main-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #b68b42; }
-        #reading-test .rt-links { display: flex; justify-content: space-between; margin-top: 22px; gap: 10px; flex-wrap: wrap; }
-        #reading-test .rt-link { color: #cccccc; text-decoration: none; font-size: 14px; font-weight: 600; }
-        #reading-test .rt-link:hover { color: var(--white); text-decoration: underline; }
 
         .progress-tracker { margin-top: 28px; padding: 25px; background: var(--surface); border: 1px solid var(--line); border-radius: 5px; }
         .progress-overview { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
         .progress-track { height: 10px; width: 100%; margin-top: 16px; overflow: hidden; background: #1C1E21; border: 1px solid #444; border-radius: 2px; }
-        
         .progress-track-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--rosegold), var(--gold)); transition: width .25s ease; }
-        
         .progress-items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
         .progress-item { padding: 17px; border: 1px solid var(--line); background: var(--bg); }
         .progress-item h3 { margin: 0 0 7px; font-size: 16px; }
@@ -509,7 +503,6 @@
 
         .reading-material-card { margin-top: 28px; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 5px; }
         .reading-material-card p { color: var(--gray); }
-        .reading-material-card .action-link { display: inline-flex; margin-top: 8px; color: #ffffff; border-bottom: 1px solid var(--rosegold); padding-bottom: 4px; }
 
         .community-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px; }
         .community-card {
@@ -544,7 +537,6 @@
             font-weight: 700;
             color: white;
         }
-        .community-card.full-width { grid-column: span 2; }
 
         .certificate-box {
             padding: clamp(24px, 4vw, 40px);
@@ -598,7 +590,6 @@
             .menu-card { min-height: 260px; }
             .about-grid { gap: 35px; }
             .closing, .footer-row, .certificate-box { align-items: flex-start; flex-direction: column; }
-            .community-card.full-width { grid-column: span 1; }
             .profiles-grid { grid-template-columns: 1fr; }
         }
 
@@ -648,9 +639,7 @@
     <header class="topbar">
         <div class="container navbar">
             <a class="brand" href="#home" aria-label="The Sound Within halaman utama">
-                <div class="brand-logo-frame">
-                    <img src="The Sound Within Monogram Emblem.png" alt="Logo The Sound Within">
-                </div>
+                <div class="brand-logo-frame" aria-hidden="true">TSW</div>
                 <span class="brand-name">THE SOUND WITHIN<small>THE ART OF UNDERSTANDING MUSIC</small></span>
             </a>
             <nav class="nav-links" id="navLinks">
@@ -788,7 +777,7 @@
             </div>
         </section>
 
-        <!-- READING MATERIAL: SEPARATE SECTION -->
+        <!-- READING MATERIAL -->
         <section class="section" id="reading-material">
             <div class="container">
                 <div class="section-heading">
@@ -822,7 +811,7 @@
                                 <g stroke="#e8e8e2" stroke-width="1.5"><line x1="75" y1="35" x2="520" y2="35"/><line x1="75" y1="55" x2="520" y2="55"/><line x1="75" y1="75" x2="520" y2="75"/><line x1="75" y1="95" x2="520" y2="95"/><line x1="75" y1="115" x2="520" y2="115"/></g>
                                 <text x="25" y="105" fill="#c9a24d" font-size="65" font-family="serif">𝄢</text>
                                 <g fill="#ffffff" font-size="15" font-family="Arial" text-anchor="middle"><text x="115" y="130">G</text><text x="165" y="110">A</text><text x="215" y="130">B</text><text x="265" y="90">C</text><text x="315" y="110">D</text><text x="365" y="70">E</text><text x="415" y="90">F</text><text x="465" y="50">G</text></g>
-                                <g fill="#c9a24d"><circle cx="115" cy="115" r="5"/><circle cx="165" cy="105" r="5"/><circle cx="215" cy="95" r="5"/><circle cx="265" cy="85" r="5"/><circle cx="315" cy="75" r="5"/><circle cx="365" cy="65" r="5"/><circle cx="415" cy="55" r="5"/><circle cx="465" cy="45" r="5"/></g>
+                                <g fill="#c9a24d"><circle cx="115" cy="115" r="5"/><circle cx="165" cy="105" r="5"/><circle cx="215" cy="95" r="5"/><circle cx="265" cy="85" r="5"/><circle cx="315" cy="75" r="5"/><circle cx="415" cy="55" r="5"/><circle cx="465" cy="45" r="5"/></g>
                             </svg>
                             <p><strong>Garis dari bawah:</strong> G – B – D – F – A.</p>
                             <p><strong>Spasi dari bawah:</strong> A – C – E – G.</p>
@@ -837,7 +826,6 @@
                         <li><strong>Garis bantu:</strong> garis pendek tambahan untuk not yang berada di atas atau di bawah paranada.</li>
                         <li><strong>Kunci musik:</strong> tanda di awal paranada yang membantu menentukan nama nada pada setiap garis dan spasi.</li>
                     </ul>
-                    <div class="material-note"><strong>Tips latihan:</strong> tentukan dulu kunci musiknya, mulai membaca dari garis paling bawah, lalu hitung posisi garis dan spasi secara berurutan. Nama nada yang sama pada posisi berbeda dapat berada pada oktaf berbeda.</div>
                 </div>
             </div>
         </section>
@@ -872,7 +860,6 @@
                         #hft-listening .hft-result-row { display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid var(--line); }
                         #hft-listening .hft-result-row:last-of-type { border-bottom:0; }
                         #hft-listening .hft-result-value { font-weight:900; text-align:right; color:var(--gold); }
-                        #hft-listening .hft-cert-btn { width:100%; margin-top:16px; background:#111; color:#fff; }
                         #hft-listening .hft-tutorial { font-size:13px; color:var(--gray); line-height:1.7; text-align:left; margin:12px 0; }
                         @media(max-width:480px) { #hft-listening { padding:12px; } #hft-listening .hft-screen { padding:22px 12px; } #hft-listening h3 { font-size:22px; } #hft-listening .hft-numpad { gap:7px; } #hft-listening .hft-numpad .hft-btn { padding:12px 6px; } }
                     </style>
@@ -921,8 +908,6 @@
                 <section id="swt-pitch-test">
                     <style>
                         #swt-pitch-test {
-                            --blue: #ffffff;
-                            --pale: #2C3036;
                             font-family: Arial, sans-serif;
                             background: var(--bg);
                             color: #f8f8f5;
@@ -1030,8 +1015,6 @@
                             <p class="muted" id="swt-summary">Selesaikan tes untuk melihat skor akhir dan band score.</p>
                             <p class="note">Band score latihan menggunakan skala internal 0,0–9,0 berdasarkan akurasi nada, bukan skor IELTS resmi.</p>
                         </div>
-
-                        <p class="note">Pitch detection checks the frequency of your humming. This version assesses the root note of each chord, not the complete chord quality. Microphone access requires permission and usually HTTPS or localhost.</p>
                     </div>
 
                     <script>
@@ -1042,10 +1025,7 @@
 
                             const $ = id => root.querySelector("#" + id);
 
-                            const keys = {
-                                C: 60, D: 62, E: 64, F: 65, G: 67, A: 69, Bb: 70
-                            };
-
+                            const keys = { C: 60, D: 62, E: 64, F: 65, G: 67, A: 69, Bb: 70 };
                             const degrees = [
                                 { roman: "I", offset: 0, triad: [0, 4, 7] },
                                 { roman: "ii", offset: 2, triad: [0, 3, 7] },
@@ -1071,7 +1051,7 @@
                             function getAudio() {
                                 if (!audio) {
                                     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                                    if (!AudioContextClass) throw new Error("Your browser does not support Web Audio.");
+                                    if (!AudioContextClass) throw new Error("Browser kamu belum mendukung Web Audio.");
                                     audio = new AudioContextClass();
                                 }
                                 if (audio.state === "suspended") return audio.resume().then(() => audio);
@@ -1108,7 +1088,7 @@
                                     return Promise.resolve();
                                 }
                                 if (!progression.length) {
-                                    status("Generate a progression first.");
+                                    status("Generate progresi terlebih dahulu.");
                                     return Promise.resolve();
                                 }
                                 const degree = progression[index];
@@ -1117,9 +1097,7 @@
                             }
 
                             function generateProgression() {
-                                let next;
-                                let signature;
-                                let attempts = 0;
+                                let next, signature, attempts = 0;
                                 do {
                                     const length = 4 + Math.floor(Math.random() * 3);
                                     next = [];
@@ -1139,8 +1117,8 @@
                                 renderSequence();
                                 updateScore();
                                 updateCurrent();
-                                $("swt-summary").textContent = "New progression generated. Listen to each chord and hum its root note.";
-                                status("New progression ready. Press Play Current Chord.");
+                                $("swt-summary").textContent = "Progresi baru disiapkan. Dengarkan setiap chord lalu humming nada dasarnya.";
+                                status("Progresi siap. Tekan Play Current Chord.");
                             }
 
                             function renderSequence() {
@@ -1164,8 +1142,8 @@
 
                             function updateCurrent() {
                                 if (!progression.length) return;
-                                $("swt-current-title").textContent = "Chord " + (index + 1) + " of " + progression.length;
-                                $("swt-instruction").textContent = "Listen to the chord, then hum its root note. Identify the pitch with your voice.";
+                                $("swt-current-title").textContent = "Chord " + (index + 1) + " dari " + progression.length;
+                                $("swt-instruction").textContent = "Dengarkan chord, lalu humming nada dasar (root note)-nya.";
                                 progression.forEach((_, i) => {
                                     const card = $("swt-step-" + i);
                                     if (!card) return;
@@ -1195,14 +1173,9 @@
                                     : (total ? band + " / 9.0 (sementara)" : "— / 9.0");
 
                                 if (testFinished) {
-                                    $("swt-summary").textContent =
-                                        "Tes selesai: " + correct + " dari " + total +
-                                        " nada benar. " + Math.max(0, total - completed) +
-                                        " soal belum dijawab dihitung 0 poin.";
+                                    $("swt-summary").textContent = "Tes selesai: " + correct + " dari " + total + " nada benar.";
                                 } else {
-                                    $("swt-summary").textContent =
-                                        completed + " dari " + total + " soal dijawab. " +
-                                        "Skor dihitung dari 100 poin untuk tiap nada yang benar.";
+                                    $("swt-summary").textContent = completed + " dari " + total + " soal dijawab.";
                                 }
                             }
 
@@ -1221,22 +1194,16 @@
                                 rms = Math.sqrt(rms / size);
                                 if (rms < 0.0002) return null;
 
-                                let bestOffset = -1;
-                                let bestCorrelation = 0;
+                                let bestOffset = -1, bestCorrelation = 0;
                                 const minPeriod = Math.max(2, Math.floor(sampleRate / 1000));
                                 const maxPeriod = Math.min(Math.floor(sampleRate / 70), size - 1);
 
                                 for (let offset = minPeriod; offset <= maxPeriod; offset++) {
-                                    let cross = 0;
-                                    let energyA = 0;
-                                    let energyB = 0;
+                                    let cross = 0, energyA = 0, energyB = 0;
                                     const count = size - offset;
                                     for (let i = 0; i < count; i += 2) {
-                                        const a = centered[i];
-                                        const b = centered[i + offset];
-                                        cross += a * b;
-                                        energyA += a * a;
-                                        energyB += b * b;
+                                        const a = centered[i], b = centered[i + offset];
+                                        cross += a * b; energyA += a * a; energyB += b * b;
                                     }
                                     const denominator = Math.sqrt(energyA * energyB) + 1e-12;
                                     const correlation = cross / denominator;
@@ -1250,37 +1217,24 @@
                                 const pitch = sampleRate / bestOffset;
                                 if (pitch < 70 || pitch > 1000) return null;
 
-                                return {
-                                    frequency: pitch,
-                                    midi: 69 + 12 * Math.log2(pitch / 440),
-                                    confidence: bestCorrelation,
-                                    volume: rms
-                                };
+                                return { frequency: pitch, midi: 69 + 12 * Math.log2(pitch / 440), confidence: bestCorrelation, volume: rms };
                             }
 
                             function requestMicrophone() {
                                 if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                                    return Promise.reject(new Error("Microphone access requires HTTPS or localhost."));
+                                    return Promise.reject(new Error("Akses mikrofon membutuhkan koneksi HTTPS atau localhost."));
                                 }
                                 if (micStream) return Promise.resolve(micStream);
                                 return navigator.mediaDevices.getUserMedia({
-                                    audio: {
-                                        channelCount: { ideal: 1 },
-                                        echoCancellation: false,
-                                        noiseSuppression: false,
-                                        autoGainControl: true
-                                    }
-                                }).then(stream => {
-                                    micStream = stream;
-                                    return stream;
-                                });
+                                    audio: { channelCount: { ideal: 1 }, echoCancellation: false, noiseSuppression: false, autoGainControl: true }
+                                }).then(stream => { micStream = stream; return stream; });
                             }
 
                             function analyzeHumming() {
                                 if (!testStarted || testFinished || !progression.length || busy || (results[index] && results[index].correct)) return;
                                 busy = true;
                                 $("swt-mic").disabled = true;
-                                status("Requesting microphone access...");
+                                status("Meminta izin mikrofon...");
 
                                 Promise.all([requestMicrophone(), getAudio()]).then(([stream, ctx]) => {
                                     const source = ctx.createMediaStreamSource(stream);
@@ -1291,16 +1245,12 @@
 
                                     const buffer = new Float32Array(analyser.fftSize);
                                     const readings = [];
-                                    let frames = 0;
-                                    const maxFrames = 150;
+                                    let frames = 0, maxFrames = 150;
 
-                                    status("Hum the root note steadily for about two seconds...");
+                                    status("Humming nada dasar secara stabil selama sekitar 2 detik...");
 
                                     function capture() {
-                                        if (!busy) {
-                                            source.disconnect();
-                                            return;
-                                        }
+                                        if (!busy) { source.disconnect(); return; }
                                         analyser.getFloatTimeDomainData(buffer);
                                         let inputEnergy = 0;
                                         for (let i = 0; i < buffer.length; i++) inputEnergy += buffer[i] * buffer[i];
@@ -1314,17 +1264,14 @@
                                         if (pitch) readings.push(pitch);
                                         frames++;
 
-                                        if (frames < maxFrames) {
-                                            requestAnimationFrame(capture);
-                                            return;
-                                        }
+                                        if (frames < maxFrames) { requestAnimationFrame(capture); return; }
 
                                         busy = false;
                                         source.disconnect();
                                         $("swt-mic").disabled = false;
 
                                         if (readings.length < 8) {
-                                            status("Sinyal mikrofon belum cukup stabil untuk membaca nada. Cek apakah indikator level bergerak, dekatkan mulut ke mikrofon, lalu humming satu nada stabil.");
+                                            status("Sinyal mikrofon belum cukup stabil. Dekatkan mulut ke mikrofon lalu humming satu nada stabil.");
                                             return;
                                         }
 
@@ -1334,10 +1281,7 @@
                                         const expectedMidi = chordRoot(progression[index]);
                                         const detectedClass = ((detectedMidi % 12) + 12) % 12;
                                         const expectedClass = ((expectedMidi % 12) + 12) % 12;
-                                        const distance = Math.min(
-                                            (detectedClass - expectedClass + 12) % 12,
-                                            (expectedClass - detectedClass + 12) % 12
-                                        );
+                                        const distance = Math.min((detectedClass - expectedClass + 12) % 12, (expectedClass - detectedClass + 12) % 12);
                                         const semitoneError = Math.abs(((middle.midi - expectedMidi + 18) % 12) - 6);
                                         const isCorrect = distance === 0 && semitoneError < 0.5;
 
@@ -1352,9 +1296,9 @@
                                         const expectedName = midiName(expectedMidi);
                                         const detectedName = midiName(detectedMidi);
                                         if (isCorrect) {
-                                            status("✓ Pitch matched! Detected " + detectedName + ". The target root was " + expectedName + ".");
+                                            status("✓ Pitch matched! Terdeteksi nada " + detectedName + ". Nada dasar target adalah " + expectedName + ".");
                                         } else {
-                                            status("Not matched. Detected " + detectedName + ", while the target root was " + expectedName + ". Listen again and try humming the root note.");
+                                            status("Belum pas. Terdeteksi nada " + detectedName + ", padahal nada dasarnya " + expectedName + ".");
                                         }
                                         renderSequence();
                                         updateScore();
@@ -1365,7 +1309,7 @@
                                 }).catch(error => {
                                     busy = false;
                                     $("swt-mic").disabled = false;
-                                    status(error.message || "Could not access the microphone.");
+                                    status(error.message || "Gagal mengakses mikrofon.");
                                 });
                             }
 
@@ -1388,7 +1332,7 @@
                                 $("swt-start").textContent = "Tes Sedang Berjalan";
                                 setTestControls(true);
                                 generateProgression();
-                                status("Tes dimulai. Dengarkan chord, lalu humming nada root-nya.");
+                                status("Tes dimulai. Dengarkan chord, lalu humming nada dasarnya.");
                             }
 
                             function finishTest() {
@@ -1407,20 +1351,14 @@
                                     localStorage.setItem("tsw_score_speaking", JSON.stringify({score: scoreText, band: bandText, accuracy: accuracyText}));
                                 } catch (e) {}
                                 if (typeof window.trackSoundProgress === "function") window.trackSoundProgress("speaking");
-                                status("Tes selesai. Skor dan band score akhir sudah diperbarui.");
+                                status("Tes selesai. Skor dan band score akhir diperbarui.");
                             }
 
                             $("swt-start").addEventListener("click", startTest);
                             $("swt-finish").addEventListener("click", finishTest);
-                            $("swt-new").addEventListener("click", function () {
-                                if (testStarted && !testFinished && !busy) generateProgression();
-                            });
-                            $("swt-play").addEventListener("click", function () {
-                                playCurrentChord().catch(error => status(error.message));
-                            });
-                            $("swt-replay").addEventListener("click", function () {
-                                playCurrentChord().catch(error => status(error.message));
-                            });
+                            $("swt-new").addEventListener("click", function () { if (testStarted && !testFinished && !busy) generateProgression(); });
+                            $("swt-play").addEventListener("click", function () { playCurrentChord().catch(error => status(error.message)); });
+                            $("swt-replay").addEventListener("click", function () { playCurrentChord().catch(error => status(error.message)); });
                             $("swt-tonic").addEventListener("click", function () {
                                 if (!testStarted || testFinished) return;
                                 const tonic = keys[$("swt-key").value];
@@ -1432,22 +1370,17 @@
                                 if (index < progression.length - 1) {
                                     index++;
                                     updateCurrent();
-                                    status("Listen to the next chord, then hum its root note.");
-                                } else {
-                                    status("Progression completed! Generate a new one to continue.");
+                                    status("Dengarkan chord berikutnya, lalu humming nada dasarnya.");
                                 }
                             });
-                            $("swt-key").addEventListener("change", function () {
-                                if (testStarted && !testFinished && !busy) generateProgression();
-                            });
+                            $("swt-key").addEventListener("change", function () { if (testStarted && !testFinished && !busy) generateProgression(); });
 
                             $("swt-sequence").innerHTML = "";
                             $("swt-current-title").textContent = "Ready to begin";
-                            $("swt-instruction").textContent = "Press Mulai Tes to generate a random progression.";
+                            $("swt-instruction").textContent = "Tekan Mulai Tes untuk memulai.";
                             $("swt-score").textContent = "0 / 0 pts";
                             $("swt-accuracy").textContent = "0%";
                             $("swt-band").textContent = "— / 9.0";
-                            $("swt-summary").textContent = "Skor akhir dan band score akan muncul setelah tes diselesaikan.";
                             $("swt-key").disabled = true;
                             $("swt-new").disabled = true;
                             $("swt-tonic").disabled = true;
@@ -1539,25 +1472,25 @@
                     <div class="community-card">
                         <div class="card-eyebrow">KOMUNITAS</div>
                         <h4>Komunitas & Tantangan Mingguan</h4>
-                        <p>Forum diskusi dan tantangan belajar mingguan bersama sesama pengguna The Sound Within. Adu kemampuan, saling koreksi, dan tumbuh bersama.</p>
-                        <span class="coming-soon-badge">COMING SOON</span>
+                        <p>Forum diskusi dan tantangan belajar mingguan bersama sesama pengguna The Sound Within.</p>
+                        <a class="action-link" href="https://www.instagram.com/elmozart._?psln=ZWdlemtpYXZ3aXFx" target="_blank" rel="noopener">Kunjungi Media Sosial Kami ↗</a>
                     </div>
                     <div class="community-card">
                         <div class="card-eyebrow">PENGINGAT</div>
                         <h4>Notifikasi & Pengingat Belajar</h4>
-                        <p>Jaga konsistensi belajarmu dengan pengingat rutin. Fitur ini akan hadir untuk memastikan kamu tidak melewatkan sesi latihan harianmu.</p>
+                        <p>Jaga konsistensi belajarmu dengan pengingat rutin harian.</p>
                         <span class="coming-soon-badge">COMING SOON</span>
                     </div>
                     <div class="community-card">
                         <div class="card-eyebrow">DUKUNGAN</div>
                         <h4>Dukungan via Media Sosial</h4>
-                        <p>Ada pertanyaan atau masukan? Hubungi kami langsung melalui media sosial The Sound Within. Tim kami siap merespons dan membantu.</p>
-                        <a class="action-link" href="https://instagram.com" target="_blank" rel="noopener">Kunjungi Media Sosial Kami ↗</a>
+                        <p>Ada pertanyaan? Hubungi kami langsung melalui media sosial The Sound Within.</p>
+                        <a class="action-link" href="https://www.instagram.com/elmozart._?psln=ZWdlemtpYXZ3aXFx" target="_blank" rel="noopener">Kunjungi Media Sosial Kami ↗</a>
                     </div>
                     <div class="community-card">
                         <div class="card-eyebrow">FEEDBACK</div>
                         <h4>Feedback via Kuesioner Rutin</h4>
-                        <p>Bantu kami berkembang dengan mengisi kuesioner singkat. Pendapatmu sangat berarti untuk meningkatkan pengalaman belajar di The Sound Within.</p>
+                        <p>Bantu kami berkembang dengan mengisi kuesioner singkat.</p>
                         <a class="action-link" href="https://forms.gle/QcnPeRciBBgLEMUY6" target="_blank" rel="noopener">Isi Kuesioner Sekarang ↗</a>
                     </div>
                 </div>
@@ -1571,37 +1504,31 @@
                     <div>
                         <p class="eyebrow">THE SOUND WITHIN EXCLUSIVE</p>
                         <h2>Go beyond<br>the notes.</h2>
-                        <p>Siap memahami musik lebih dalam? Jelajahi fitur-fitur lanjutan kami yang ditempatkan pada halaman berbeda untuk latihan yang lebih terfokus.</p>
+                        <p>Siap memahami musik lebih dalam? Jelajahi fitur-fitur lanjutan kami untuk latihan yang lebih terfokus.</p>
                     </div>
                     <div class="exclusive-grid-pages">
                         <div class="feature-page-card">
                             <h4>Progresi Chord</h4>
-                            <p>Modul latihan fungsi harmoni dan latihan transisi chord tingkat lanjut.</p>
+                            <p>Modul latihan fungsi harmoni dan transisi chord tingkat lanjut.</p>
                             <span class="coming-soon-badge">COMING SOON</span>
                         </div>
                         <div class="feature-page-card">
                             <h4>Transposisi Nada</h4>
-                            <p>Tantangan memindahkan struktur lagu ke berbagai kunci dasar secara presisi.</p>
+                            <p>Tantangan memindahkan struktur lagu ke berbagai kunci dasar.</p>
                             <span class="coming-soon-badge">COMING SOON</span>
                         </div>
                         <div class="feature-page-card">
                             <h4>Membership Fee</h4>
-                            <p>Akses dasar gratis dengan fitur lanjutan berbayar untuk pengalaman belajar yang lebih dalam.</p>
+                            <p>Akses dasar gratis dengan fitur lanjutan berbayar.</p>
                             <span class="coming-soon-badge">COMING SOON</span>
                         </div>
                         <div class="feature-page-card">
                             <h4>Konten Eksklusif Premium</h4>
-                            <p>Materi dan modul khusus hanya untuk subscriber premium. Lebih dalam, lebih terstruktur.</p>
-                            <span class="coming-soon-badge">COMING SOON</span>
-                        </div>
-                        <div class="feature-page-card" style="grid-column:span 2;">
-                            <h4>Sponsorship Institusi Pendidikan</h4>
-                            <p>Kemitraan berbayar dengan sekolah atau universitas yang ingin menjangkau pengguna platform.</p>
+                            <p>Materi dan modul khusus hanya untuk subscriber premium.</p>
                             <span class="coming-soon-badge">COMING SOON</span>
                         </div>
                     </div>
                 </div>
-                <p class="exclusive-note">Catatan: Exclusive saat ini merupakan pratinjau konsep. Halaman fitur lanjutan sedang dalam tahap pengembangan.</p>
             </div>
         </section>
 
@@ -1623,9 +1550,7 @@
     <footer>
         <div class="container footer-row">
             <a class="brand" href="#home">
-                <div class="brand-logo-frame">
-                    <img src="The Sound Within Monogram Emblem.png" alt="Logo The Sound Within">
-                </div>
+                <div class="brand-logo-frame" aria-hidden="true">TSW</div>
                 <span class="brand-name">THE SOUND WITHIN<small>THE ART OF UNDERSTANDING MUSIC</small></span>
             </a>
             <div class="footer-links">
@@ -1681,10 +1606,6 @@
         const NOTE_NAMES = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
         const DEGREE = { C: 1, D: 2, E: 3, F: 4, G: 5, A: 6, B: 7 };
         const PUJIAN = ["🎹 GOKIL!", "🎹 SEMPURNA!", "🎹 MATA LO TAJAM!", "🎹 REFLEKS DEWA!"];
-        const PETUNJUK = {
-            treble: "Kunci G (treble): garis dari bawah ke atas = E G B D F, spasi dari bawah ke atas = F A C E. Not di luar paranada dihitung dari garis bantu terdekat.",
-            bass: "Kunci F (bass): garis dari bawah ke atas = G B D F A, spasi dari bawah ke atas = A C E G. Not di luar paranada dihitung dari garis bantu terdekat."
-        };
 
         function buatBank() {
             const bank = [];
@@ -1707,16 +1628,6 @@
         function gambarNot(clef, note, oktaf) {
             const box = document.getElementById('notationBox');
             box.innerHTML = '';
-            if (USE_PNG) {
-                const img = document.createElement('img');
-                img.src = clef + '_' + note + oktaf + '.png';
-                img.alt = 'Not balok';
-                img.onerror = function () {
-                    box.innerHTML = '<span style="color:#111111;font-weight:700;">Gambar ' + img.src.split('/').pop() + ' tidak ditemukan.</span>';
-                };
-                box.appendChild(img);
-                return;
-            }
             if (typeof Vex === 'undefined') {
                 box.innerHTML = '<span style="color:#ffffff;font-weight:700;">Library VexFlow gagal dimuat. Cek koneksi internet lalu refresh halaman.</span>';
                 return;
@@ -1737,13 +1648,9 @@
             voice.draw(ctx, stave);
         }
 
-        let soal = [];
-        let idx = 0;
-        let skor = 0;
-        let benar = 0;
+        let soal = [], idx = 0, skor = 0, benar = 0;
         let statistik = { treble: [0, 0], bass: [0, 0] };
-        let waktuMulai = 0;
-        let bolehJawab = false;
+        let waktuMulai = 0, bolehJawab = false;
 
         (function buatTombol() {
             const grid = document.getElementById('answerGrid');
@@ -1752,7 +1659,6 @@
                 b.className = 'ans-btn';
                 b.textContent = n;
                 b.disabled = true;
-                b.setAttribute('data-note', n);
                 b.onclick = function () { jawab(n); };
                 grid.appendChild(b);
             });
@@ -1773,9 +1679,7 @@
 
         function startSession() {
             soal = acak(BANK).slice(0, Math.min(TOTAL_SOAL, BANK.length));
-            idx = 0;
-            skor = 0;
-            benar = 0;
+            idx = 0; skor = 0; benar = 0;
             statistik = { treble: [0, 0], bass: [0, 0] };
             document.getElementById('score').innerText = '0';
             document.getElementById('latency').innerText = '-';
@@ -1818,17 +1722,13 @@
                     poin -= POTONGAN_LAMBAT;
                     catatan = '<br><span style="color:#ffffff;">(Telat baca! Poin dikurangi ' + POTONGAN_LAMBAT + ')</span>';
                 }
-                skor += poin;
-                benar++;
-                statistik[s.clef][0]++;
+                skor += poin; benar++; statistik[s.clef][0]++;
                 const puji = PUJIAN[Math.floor(Math.random() * PUJIAN.length)];
-                st.innerText = 'BENAR!';
-                st.style.color = 'var(--good)';
-                fb.innerHTML = '<span style="color:var(--good);font-weight:900;">' + puji + ' TEPAT! +' + poin + '</span><br>' + 'Not ' + label + ' = family chord ' + tingkat + ' di C Major.' + catatan;
+                st.innerText = 'BENAR!'; st.style.color = 'var(--good)';
+                fb.innerHTML = '<span style="color:var(--good);font-weight:900;">' + puji + ' TEPAT! +' + poin + '</span><br>Not ' + label + ' = family chord ' + tingkat + ' di C Major.' + catatan;
             } else {
-                st.innerText = 'SALAH!';
-                st.style.color = 'var(--bad)';
-                fb.innerHTML = '❌ <span style="color:var(--bad);font-weight:900;">Jawaban lo ' + huruf + ', padahal itu not ' + label + '</span> ' + '(family chord ' + tingkat + ' di C Major).<br>💡 ' + PETUNJUK[s.clef];
+                st.innerText = 'SALAH!'; st.style.color = 'var(--bad)';
+                fb.innerHTML = '❌ <span style="color:var(--bad);font-weight:900;">Jawaban kamu ' + huruf + ', padahal itu not ' + label + '</span> (family chord ' + tingkat + ' di C Major).';
             }
             document.getElementById('score').innerText = skor;
             document.getElementById('latency').innerText = waktu;
@@ -1843,18 +1743,13 @@
             if (persen >= 90) level = 'NATIVE READER';
             else if (persen >= 70) level = 'ADVANCED';
             else if (persen >= 50) level = 'INTERMEDIATE';
-            else level = 'BEGINNER (banyakin latihan baca not ya!)';
-            const t = statistik.treble;
-            const b = statistik.bass;
-            let rincian = '';
-            if (t[1]) rincian += 'Treble: ' + t[0] + '/' + t[1] + ' benar &nbsp; ';
-            if (b[1]) rincian += 'Bass: ' + b[0] + '/' + b[1] + ' benar';
+            else level = 'BEGINNER';
             document.getElementById('notationBox').innerHTML = '<span class="placeholder">🎹</span>';
             document.getElementById('info').innerText = 'UJIAN SELESAI';
             const st = document.getElementById('status');
             st.innerText = 'Level: ' + level;
             st.style.color = 'var(--gold)';
-            document.getElementById('feedback').innerHTML = 'Benar <b>' + benar + '</b> dari <b>' + total + '</b> soal (' + persen + '%).<br>' + 'Skor akhir: <b>' + skor + '</b><br>' + rincian;
+            document.getElementById('feedback').innerHTML = 'Benar <b>' + benar + '</b> dari <b>' + total + '</b> soal (' + persen + '%).<br>Skor akhir: <b>' + skor + '</b>';
             const sb = document.getElementById('startBtn');
             sb.innerText = 'ULANGI UJIAN (SOAL BARU)';
             sb.style.display = 'block';
@@ -1952,13 +1847,12 @@
             };
             const updateInfo = () => $('hft-roundInfo').textContent='RONDE: '+round+' | PROGRESI UNIK TERMAINKAN: '+seen.size;
             const toggle = state => {canAnswer=state;buttons.forEach(b=>b.disabled=!state);};
-            function playSound(n){for(let i=1;i<=7;i++){const a=$('hft-audio_'+i);if(a){a.pause();a.currentTime=0;}}const a=$('hft-audio_'+n);if(a){a.currentTime=0;a.play().catch(()=>{$('hft-feedback').textContent='Audio tidak dapat diputar. Pastikan file 1.wav sampai 7.wav berada di folder yang sama dengan website.html.';});}}
+            function playSound(n){for(let i=1;i<=7;i++){const a=$('hft-audio_'+i);if(a){a.pause();a.currentTime=0;}}const a=$('hft-audio_'+n);if(a){a.currentTime=0;a.play().catch(()=>{});}}
             function startRound(){if(finished)return;$start.style.display='none';$finish.style.display='none';$('hft-resultPanel').style.display='none';round++;progression=makeProgression();step=0;playing=true;updateInfo();$('hft-status').textContent='KEY AKTIF: C MAJOR';$('hft-feedback').textContent='Ronde '+round+': '+progression.length+' chord. Bersiap mendengarkan chord pertama...';toggle(true);setTimeout(nextChord,1200);}
-            function nextChord(){if(finished)return;if(step>=progression.length){$('hft-status').textContent='RONDE SELESAI!';$('hft-feedback').textContent='Progresi selesai. Lanjutkan ke progresi baru atau akhiri tes untuk menyimpan hasil.';$start.style.display='block';$start.textContent='LANJUT PROGRESI BARU';$finish.style.display='block';toggle(false);playing=false;completedRounds++;return;}$('hft-status').textContent='MENEBAK CHORD KE-'+(step+1)+' DARI '+progression.length+'...';playSound(progression[step]);startTime=Date.now();}
-            function evaluation(user, correct){const minor=[2,3,6],major=[1,4,5];if(minor.includes(correct)&&major.includes(user))return'Lo nebak Major, padahal aslinya minor.';if(major.includes(correct)&&minor.includes(user))return'Lo nebak minor, padahal aslinya Major.';if(correct===5&&user===4)return'Chord 5 (G) cenderung resolve ke chord 1 (C); chord 4 (F) punya fungsi berbeda.';return'Fokus dengarkan nada bass paling bawah untuk menebak root.';}
-            function answer(user){if(!playing||!canAnswer||finished)return;const latency=Date.now()-startTime, correct=progression[step];totalQuestions++;totalLatency+=latency;let feedback='';if(user===correct){correctAnswers++;let points=latency>1500?60:100;score+=points;feedback='<span style="color:#16803c;font-weight:900">TEPAT! +'+points+'</span>'+(latency>1500?'<br><small>(Telat menjawab, poin dikurangi 40)</small>':'');}else{feedback='<span style="color:#d11a2a;font-weight:900">SALAH! HARUSNYA CHORD '+correct+'.</span><br><small>EVALUASI: '+evaluation(user,correct)+'</small>';}$('hft-feedback').innerHTML=feedback;$('hft-score').textContent=score;$('hft-latency').textContent=latency;step++;toggle(false);setTimeout(()=>{if(finished)return;toggle(true);nextChord();},1500);}
+            function nextChord(){if(finished)return;if(step>=progression.length){$('hft-status').textContent='RONDE SELESAI!';$('hft-feedback').textContent='Progresi selesai.';$start.style.display='block';$start.textContent='LANJUT PROGRESI BARU';$finish.style.display='block';toggle(false);playing=false;completedRounds++;return;}$('hft-status').textContent='MENEBAK CHORD KE-'+(step+1)+' DARI '+progression.length+'...';playSound(progression[step]);startTime=Date.now();}
+            function answer(user){if(!playing||!canAnswer||finished)return;const latency=Date.now()-startTime, correct=progression[step];totalQuestions++;totalLatency+=latency;let feedback='';if(user===correct){correctAnswers++;let points=latency>1500?60:100;score+=points;feedback='<span style="color:#16803c;font-weight:900">TEPAT! +'+points+'</span>';}else{feedback='<span style="color:#d11a2a;font-weight:900">SALAH! HARUSNYA CHORD '+correct+'.</span>';}$('hft-feedback').innerHTML=feedback;$('hft-score').textContent=score;$('hft-latency').textContent=latency;step++;toggle(false);setTimeout(()=>{if(finished)return;toggle(true);nextChord();},1500);}
             function bandScore(){const b=totalQuestions?Math.round(score/totalQuestions):0;return {score:b,label:b>=90?'Excellent':b>=75?'Good':b>=60?'Developing':'Beginner'};}
-            function finishTest(){if(finished||playing||!totalQuestions)return;finished=true;toggle(false);for(let i=1;i<=7;i++){const a=$('hft-audio_'+i);if(a){a.pause();a.currentTime=0;}}const accuracy=Math.round(correctAnswers/totalQuestions*100), avg=Math.round(totalLatency/totalQuestions), band=bandScore();const result={score:score,bandScore:band.score,bandLabel:band.label,rounds:completedRounds,total:totalQuestions,correct:correctAnswers,accuracy:accuracy,latency:avg};try{localStorage.setItem('tsw_score_listening',JSON.stringify(result));const old=JSON.parse(localStorage.getItem(RESULTS_KEY)||'[]');old.push({...result,date:new Date().toISOString()});localStorage.setItem(RESULTS_KEY,JSON.stringify(old));}catch(e){}if(typeof window.trackSoundProgress==='function')window.trackSoundProgress('listening');$('hft-finalScore').textContent=score;$('hft-finalRounds').textContent=completedRounds;$('hft-finalQuestions').textContent=totalQuestions;$('hft-finalCorrect').textContent=correctAnswers;$('hft-finalAccuracy').textContent=accuracy+'%';$('hft-finalLatency').textContent=avg+' ms';$('hft-bandScore').textContent=band.score+' / 100';$('hft-bandLabel').textContent=band.label;$('hft-saveStatus').textContent='Hasil Listening tersimpan di browser ini.';$('hft-status').textContent='TES SELESAI!';$('hft-feedback').textContent='Hasil akhir ditampilkan di bawah. Unduh sertifikat setelah mengerjakan komponen yang ingin dicantumkan.';$start.style.display='none';$finish.style.display='none';$('hft-resultPanel').style.display='block';}
+            function finishTest(){if(finished||playing||!totalQuestions)return;finished=true;toggle(false);for(let i=1;i<=7;i++){const a=$('hft-audio_'+i);if(a){a.pause();a.currentTime=0;}}const accuracy=Math.round(correctAnswers/totalQuestions*100), avg=Math.round(totalLatency/totalQuestions), band=bandScore();const result={score:score,bandScore:band.score,bandLabel:band.label,rounds:completedRounds,total:totalQuestions,correct:correctAnswers,accuracy:accuracy,latency:avg};try{localStorage.setItem('tsw_score_listening',JSON.stringify(result));}catch(e){}if(typeof window.trackSoundProgress==='function')window.trackSoundProgress('listening');$('hft-finalScore').textContent=score;$('hft-finalRounds').textContent=completedRounds;$('hft-finalQuestions').textContent=totalQuestions;$('hft-finalCorrect').textContent=correctAnswers;$('hft-finalAccuracy').textContent=accuracy+'%';$('hft-finalLatency').textContent=avg+' ms';$('hft-bandScore').textContent=band.score+' / 100';$('hft-bandLabel').textContent=band.label;$('hft-status').textContent='TES SELESAI!';$start.style.display='none';$finish.style.display='none';$('hft-resultPanel').style.display='block';}
             $start.addEventListener('click',startRound);$finish.addEventListener('click',finishTest);buttons.forEach(b=>b.addEventListener('click',()=>answer(Number(b.dataset.answer))));document.addEventListener('keydown',e=>{if(playing&&canAnswer&&/^[1-7]$/.test(e.key)&&!e.target.matches('input,textarea,select'))answer(Number(e.key));});$('hft-certificateBtnAlways').addEventListener('click',()=>window.downloadSoundWithinCertificate());updateInfo();
         })();
 
@@ -1987,8 +1881,7 @@
             image.onload = async function () {
                 try {
                     const canvas = document.createElement('canvas');
-                    canvas.width = 1600;
-                    canvas.height = 1100;
+                    canvas.width = 1600; canvas.height = 1100;
                     const context = canvas.getContext('2d');
                     context.fillStyle = '#f6f2e9';
                     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -1996,38 +1889,21 @@
                     URL.revokeObjectURL(svgUrl);
 
                     canvas.toBlob(async function (pngBlob) {
-                        if (!pngBlob) {
-                            alert('Sertifikat belum bisa dibuat. Coba lagi atau gunakan browser lain.');
-                            return;
-                        }
-
+                        if (!pngBlob) return;
                         const fileName = 'sertifikat-the-sound-within.png';
-                        const file = new File([pngBlob], fileName, { type: 'image/png' });
-
                         const downloadUrl = URL.createObjectURL(pngBlob);
                         const link = document.createElement('a');
                         link.href = downloadUrl;
                         link.download = fileName;
-                        link.setAttribute('download', fileName);
                         link.style.display = 'none';
                         document.body.appendChild(link);
                         link.click();
                         link.remove();
-
-                        setTimeout(function () {
-                            URL.revokeObjectURL(downloadUrl);
-                        }, 120000);
+                        setTimeout(() => URL.revokeObjectURL(downloadUrl), 120000);
                     }, 'image/png');
                 } catch (error) {
                     URL.revokeObjectURL(svgUrl);
-                    console.error('Gagal menyiapkan sertifikat:', error);
-                    alert('Sertifikat gagal dibuat. Coba lagi menggunakan browser terbaru.');
                 }
-            };
-
-            image.onerror = function () {
-                URL.revokeObjectURL(svgUrl);
-                alert('Sertifikat gagal diproses. Coba tekan tombol unduh sekali lagi.');
             };
             image.src = svgUrl;
         };
@@ -2058,6 +1934,5 @@
             });
         })();
     </script>
-
 </body>
 </html>
