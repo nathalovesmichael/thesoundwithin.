@@ -68,25 +68,24 @@
         }
 
         .brand-logo-frame {
-            width: 42px;
-            height: 42px;
+            width: 43px;
+            height: 43px;
             border-radius: 50%;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #ffffff;
-            color: #22252A;
-            font-family: var(--serif);
-            font-weight: bold;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            border: 2px solid var(--rosegold);
-            box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold);
+            border: 2px solid #b76e79;
+            box-shadow: 0 0 0 2px #22252A, 0 0 0 4px #c9a24d;
             flex-shrink: 0;
-            user-select: none;
         }
-
-        .brand-name { font-size: 19px; line-height: 1.2; }
+        .brand-logo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+.brand-name { font-size: 19px; line-height: 1.2; }
 
         .brand-name small {
             display: block;
@@ -639,7 +638,9 @@
     <header class="topbar">
         <div class="container navbar">
             <a class="brand" href="#home" aria-label="The Sound Within halaman utama">
-                <div class="brand-logo-frame" aria-hidden="true">TSW</div>
+                <div class="brand-logo-frame">
+   <img src="logo.png" alt="Logo The Sound Within">
+</div>
                 <span class="brand-name">THE SOUND WITHIN<small>THE ART OF UNDERSTANDING MUSIC</small></span>
             </a>
             <nav class="nav-links" id="navLinks">
@@ -1473,7 +1474,7 @@
                         <div class="card-eyebrow">KOMUNITAS</div>
                         <h4>Komunitas & Tantangan Mingguan</h4>
                         <p>Forum diskusi dan tantangan belajar mingguan bersama sesama pengguna The Sound Within.</p>
-                        <a class="action-link" href="https://www.instagram.com/elmozart._?psln=ZWdlemtpYXZ3aXFx" target="_blank" rel="noopener">Kunjungi Media Sosial Kami ↗</a>
+                        <span class="coming-soon-badge">COMING SOON</span>
                     </div>
                     <div class="community-card">
                         <div class="card-eyebrow">PENGINGAT</div>
