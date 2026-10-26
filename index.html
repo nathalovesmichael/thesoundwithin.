@@ -226,6 +226,7 @@
         }
 
         .hero h1 em { color: var(--gold); font-weight: 500; }
+        .hero-tagline { margin: -6px 0 20px; color: var(--gold); font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 28px); letter-spacing: .5px; }
         .hero-copy { max-width: 520px; color: #dcdcd6; font-size: 15px; }
         .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
         .hero-note { margin-top: 25px; color: #bdbdb7; font-size: 11px; letter-spacing: .5px; }
@@ -673,6 +674,7 @@
                     <div class="hero-label"><span></span> RUANG UNTUK MUSIK DAN PEMAHAMAN</div>
                     <p class="eyebrow" style="margin-top: 30px;">SELAMAT DATANG DI THE SOUND WITHIN</p>
                     <h1>THE SOUND<br><em>WITHIN.</em></h1>
+                    <p class="hero-tagline">Every Expert Once Heard a First Note</p>
                     <p class="hero-copy">Musik bukan sekadar nada yang kita dengar. Ada pola, harmoni, dan cerita di balik setiap bunyi. Temukan cara baru untuk memahami musik, satu nada demi satu nada.</p>
                     <div class="hero-actions">
                         <a class="button" href="#menu">Mulai Perjalananmu <span>↗</span></a>
@@ -764,27 +766,6 @@
             </div>
         </section>
 
-        <!-- 01 READING TEST -->
-        <section class="section" id="reading-test">
-            <div class="container">
-                <div class="section-heading">
-                    <div><p class="eyebrow">01 / READING TEST</p><h2>Read the staff.</h2></div>
-                    <p class="section-description">Baca not balok di paranada, lalu jawab secepat mungkin. Setiap soal dibatasi waktu baca.</p>
-                </div>
-                <div class="screen">
-                    <h1>Harmonic Reading Test</h1>
-                    <h2>Section B: Baca Not Balok (Tuts Putih)</h2>
-                    <div id="info">Tekan mulai untuk memulai ujian membaca not.</div>
-                    <div id="notationBox"><span class="placeholder">🎹</span></div>
-                    <div id="status">Siap?</div>
-                    <div class="answer-grid" id="answerGrid"></div>
-                    <div id="feedback">Tekan huruf di keyboard (C D E F G A B) atau klik tombol di layar. Tiap soal dibatasi waktu baca, jadi jangan kelamaan mikir ya.</div>
-                    <div id="scoreBoard">SKOR: <span class="val" id="score">0</span> &nbsp;|&nbsp; LATENCY: <span class="val" id="latency">-</span> ms</div>
-                    <button class="main-btn" id="startBtn" onclick="startSession()">MULAI UJIAN</button>
-                </div>
-            </div>
-        </section>
-
         <!-- READING MATERIAL -->
         <section class="section" id="reading-material">
             <div class="container">
@@ -834,6 +815,27 @@
                         <li><strong>Garis bantu:</strong> garis pendek tambahan untuk not yang berada di atas atau di bawah paranada.</li>
                         <li><strong>Kunci musik:</strong> tanda di awal paranada yang membantu menentukan nama nada pada setiap garis dan spasi.</li>
                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 01 READING TEST -->
+        <section class="section" id="reading-test">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">01 / READING TEST</p><h2>Read the staff.</h2></div>
+                    <p class="section-description">Baca not balok di paranada, lalu jawab secepat mungkin. Setiap soal dibatasi waktu baca.</p>
+                </div>
+                <div class="screen">
+                    <h1>Harmonic Reading Test</h1>
+                    <h2>Section B: Baca Not Balok (Tuts Putih)</h2>
+                    <div id="info">Tekan mulai untuk memulai ujian membaca not.</div>
+                    <div id="notationBox"><span class="placeholder">🎹</span></div>
+                    <div id="status">Siap?</div>
+                    <div class="answer-grid" id="answerGrid"></div>
+                    <div id="feedback">Tekan huruf di keyboard (C D E F G A B) atau klik tombol di layar. Tiap soal dibatasi waktu baca, jadi jangan kelamaan mikir ya.</div>
+                    <div id="scoreBoard">SKOR: <span class="val" id="score">0</span> &nbsp;|&nbsp; LATENCY: <span class="val" id="latency">-</span> ms</div>
+                    <button class="main-btn" id="startBtn" onclick="startSession()">MULAI UJIAN</button>
                 </div>
             </div>
         </section>
