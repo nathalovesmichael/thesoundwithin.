@@ -3022,7 +3022,7 @@
         function firstName() { return account && account.name ? account.name.split(' ')[0] : ''; }
 
         /* ▼▼ ISI dengan URL Web App Google Apps Script (berakhiran /exec) untuk mencatat nama & email pengunjung ke Google Sheets ▼▼ */
-        const LOG_URL = '';
+        const LOG_URL = 'https://script.google.com/macros/s/AKfycby2G4MfA41n7cK_Hbp1CvhVv8hPuGkUEIbd3Gtg2jP1YAopebUWyWBAeRO2IHIRYoczMQ/exec';
         /* ▲▲ ─────────────────────────────────────────────────────────────────────────────────────────────── ▲▲ */
         function logVisitor(type, name, email) {
             if (!LOG_URL) return;
