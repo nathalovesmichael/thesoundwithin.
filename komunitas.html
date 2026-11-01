@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C2B4D">
+    <meta name="description" content="The Sound Within. Ruang untuk belajar teori musik, memahami harmoni, dan melatih pendengaran.">
+    <title>Komunitas — THE SOUND WITHIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59GLZ4RQGR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-59GLZ4RQGR');
+    </script>
+</head>
+
+<body>
+    <div id="site-gate"></div>
+    <div id="site-header"></div>
+
+    <main>
+        <!-- COMMUNITY & ENGAGEMENT SECTION -->
+        <section class="section" id="community">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">KOMUNITAS & KETERLIBATAN</p><h2>Grow together.</h2></div>
+                    <p class="section-description">Belajar musik lebih seru bareng komunitas. Tantang dirimu, dapatkan dukungan, dan berkembang bersama.</p>
+                </div>
+                <div class="community-grid">
+                    <div class="community-card">
+                        <div class="card-eyebrow">KOMUNITAS</div>
+                        <h4>Komunitas & Tantangan Mingguan</h4>
+                        <p>Forum diskusi dan tantangan belajar mingguan bersama sesama pengguna The Sound Within.</p>
+                        <span class="coming-soon-badge">COMING SOON</span>
+                    </div>
+                    <div class="community-card">
+                        <div class="card-eyebrow">PENGINGAT</div>
+                        <h4>Notifikasi & Pengingat Belajar</h4>
+                        <p>Jaga konsistensi belajarmu dengan pengingat rutin harian. Khusus untuk pengguna yang masuk dengan akun Google.</p>
+                        <div id="reminderLoggedOut">
+                            <div class="gsi-slot" id="gsiReminderBtn"></div>
+                            <div class="gsi-note" id="gsiReminderNote">Masuk dengan akun Google untuk mengaktifkan pengingat belajar.</div>
+                        </div>
+                        <div id="reminderLoggedIn" hidden>
+                            <div class="reminder-user">
+                                <img id="reminderAvatar" class="reminder-avatar" alt="" referrerpolicy="no-referrer">
+                                <div><strong id="reminderName"></strong><span id="reminderEmail"></span></div>
+                            </div>
+                            <label class="reminder-row" for="reminderTime">Ingatkan setiap hari pukul <input type="time" id="reminderTime" value="19:00"></label>
+                            <div class="reminder-actions">
+                                <button type="button" class="reminder-btn primary" id="reminderToggle">Aktifkan pengingat</button>
+                                <button type="button" class="reminder-btn" id="reminderTest">Tes notifikasi</button>
+                                <button type="button" class="reminder-btn" id="accountSignOut">Keluar</button>
+                            </div>
+                            <div class="reminder-status" id="reminderStatus" aria-live="polite"></div>
+                        </div>
+                    </div>
+                    <div class="community-card">
+                        <div class="card-eyebrow">DUKUNGAN</div>
+                        <h4>Dukungan via Media Sosial</h4>
+                        <p>Ada pertanyaan? Hubungi kami langsung melalui media sosial The Sound Within.</p>
+                        <a class="action-link" href="https://www.instagram.com/elmozart._?psln=ZWdlemtpYXZ3aXFx" target="_blank" rel="noopener">Kunjungi Media Sosial Kami ↗</a>
+                    </div>
+                    <div class="community-card">
+                        <div class="card-eyebrow">FEEDBACK</div>
+                        <h4>Feedback via Kuesioner Rutin</h4>
+                        <p>Bantu kami berkembang dengan mengisi kuesioner singkat.</p>
+                        <a class="action-link" href="https://forms.gle/QcnPeRciBBgLEMUY6" target="_blank" rel="noopener">Isi Kuesioner Sekarang ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FITUR EKSKLUSIF -->
+        <section class="section" id="exclusive">
+            <div class="container">
+                <div class="exclusive-box">
+                    <div>
+                        <p class="eyebrow">THE SOUND WITHIN EXCLUSIVE</p>
+                        <h2>Go beyond<br>the notes.</h2>
+                        <p>Siap memahami musik lebih dalam? Jelajahi fitur-fitur lanjutan kami untuk latihan yang lebih terfokus.</p>
+                    </div>
+                    <div class="exclusive-grid-pages">
+                        <div class="feature-page-card">
+                            <h4>Progresi Chord</h4>
+                            <p>Modul latihan fungsi harmoni dan transisi chord tingkat lanjut.</p>
+                            <span class="coming-soon-badge">COMING SOON</span>
+                        </div>
+                        <div class="feature-page-card">
+                            <h4>Transposisi Nada</h4>
+                            <p>Tantangan memindahkan struktur lagu ke berbagai kunci dasar.</p>
+                            <span class="coming-soon-badge">COMING SOON</span>
+                        </div>
+                        <div class="feature-page-card">
+                            <h4>Membership Fee</h4>
+                            <p>Akses dasar gratis dengan fitur lanjutan berbayar.</p>
+                            <span class="coming-soon-badge">COMING SOON</span>
+                        </div>
+                        <div class="feature-page-card">
+                            <h4>Konten Eksklusif Premium</h4>
+                            <p>Materi dan modul khusus hanya untuk subscriber premium.</p>
+                            <span class="coming-soon-badge">COMING SOON</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

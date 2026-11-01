@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C2B4D">
+    <meta name="description" content="The Sound Within. Ruang untuk belajar teori musik, memahami harmoni, dan melatih pendengaran.">
+    <title>Family Chord — THE SOUND WITHIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59GLZ4RQGR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-59GLZ4RQGR');
+    </script>
+</head>
+
+<body>
+    <div id="site-gate"></div>
+    <div id="site-header"></div>
+
+    <main>
+        <!-- FAMILY CHORD (MENU BARU) -->
+        <section class="section" id="family-chord">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">04 / FAMILY CHORD</p><h2>Master the family.</h2></div>
+                    <p class="section-description">24 tangga nada (12 Mayor + 12 Minor), interval, kualitas chord, latihan pendengaran, tes teori, chord chart, dan latihan transpose.</p>
+                </div>
+
+                <div class="fc-tabs" id="fc-tabs">
+                    <button class="active" type="button" onclick="FC.showSection('materi',this)">Materi</button>
+                    <button type="button" onclick="FC.showSection('latihan',this)">Latihan Audio</button>
+                    <button type="button" onclick="FC.showSection('teori',this)">Tes Teori</button>
+                    <button type="button" onclick="FC.showSection('chart',this)">Chord Chart</button>
+                    <button type="button" onclick="FC.showSection('transpose',this)">Latihan Transpose</button>
+                </div>
+
+                <!-- MATERI -->
+                <div class="fc-sec active" id="fc-materi">
+                    <h3 class="fc-title">Materi Family Chord</h3>
+
+                    <div class="legend-box">
+                        <h4>📐 Apa itu Family Chord?</h4>
+                        <p style="font-size:13px;color:var(--gray);">
+                            Family chord adalah kumpulan 7 chord (triad) yang secara alami terbentuk di dalam satu tangga nada. Setiap degree punya <strong style="color:var(--text)">kualitas</strong> — Mayor (M), minor (m), atau diminished (°) — yang ditentukan oleh interval antar nada.
+                        </p>
+                        <div class="legend-items">
+                            <span><b>W</b> = Whole step (2 semitone)</span>
+                            <span><b>H</b> = Half step (1 semitone)</span>
+                            <span><b>Mayor</b> = W W H W W W H</span>
+                            <span><b>Natural Minor</b> = W H W W H W W</span>
+                        </div>
+                    </div>
+
+                    <h4 class="fc-sub" style="color:#f0b7bf;">🎵 12 Tangga Nada Mayor</h4>
+                    <div class="key-grid" id="grid-maj"></div>
+
+                    <h4 class="fc-sub" style="color:var(--gold);">🎵 12 Tangga Nada Minor</h4>
+                    <div class="key-grid" id="grid-min"></div>
+                </div>
+
+                <!-- LATIHAN AUDIO -->
+                <div class="fc-sec" id="fc-latihan">
+                    <h3 class="fc-title">Latihan Audio</h3>
+                    <div class="latihan-center">
+                        <div class="score-strip">
+                            <div class="score-item"><div class="val" id="sc-benar">0</div><div class="lbl">Benar</div></div>
+                            <div class="score-item"><div class="val" id="sc-salah">0</div><div class="lbl">Salah</div></div>
+                            <div class="score-item"><div class="val" id="sc-soal">1</div><div class="lbl">Soal ke</div></div>
+                        </div>
+
+                        <div id="lat-mode-sel" style="display:flex;gap:8px;justify-content:center;align-items:center;margin-bottom:22px;flex-wrap:wrap;">
+                            <label style="font-size:12px;color:var(--muted)">Mode:</label>
+                            <button class="filter-btn active" type="button" onclick="FC.setLatMode('both',this)">Mayor &amp; Minor</button>
+                            <button class="filter-btn" type="button" onclick="FC.setLatMode('maj',this)">Mayor saja</button>
+                            <button class="filter-btn" type="button" onclick="FC.setLatMode('min',this)">Minor saja</button>
+                        </div>
+
+                        <div class="lat-prompt">
+                            <div class="q-label" id="lat-qlabel">Dengarkan chord berikut…</div>
+                            <div class="q-text" id="lat-qtext">— Tekan tombol untuk mulai —</div>
+                            <button class="play-btn" id="lat-play" type="button" onclick="FC.playCurrentChord()" title="Putar chord">▶</button>
+                            <div class="play-hint">Klik ▶ untuk memutar ulang</div>
+                        </div>
+
+                        <div class="options-grid" id="lat-opts"></div>
+                        <div class="feedback-text" id="lat-feedback"></div>
+                        <button class="next-btn" id="lat-next" type="button" onclick="FC.nextLatihan()">Soal Berikutnya →</button>
+                        <div style="margin-top:12px">
+                            <button class="filter-btn" type="button" onclick="FC.initLatihan()">🔄 Reset Skor</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TES TEORI -->
+                <div class="fc-sec" id="fc-teori">
+                    <h3 class="fc-title">Tes Teori</h3>
+                    <p class="fc-intro">
+                        Jawab soal-soal di bawah. Setelah memilih jawaban, klik <strong style="color:var(--text)">Buat Soal Baru</strong> untuk set soal segar yang diacak.
+                    </p>
+                    <div id="teori-container"></div>
+                    <div class="teori-actions">
+                        <button class="gen-btn" type="button" onclick="FC.genTeori()">🎲 Buat Soal Baru</button>
+                        <button class="gen-btn alt" type="button" onclick="FC.genTeoriTengah()">🎯 Khusus: Nada Tengah Mayor/Minor</button>
+                    </div>
+                </div>
+
+                <!-- CHORD CHART -->
+                <div class="fc-sec" id="fc-chart">
+                    <h3 class="fc-title">Chord Chart Lengkap</h3>
+                    <div class="filter-row">
+                        <button class="filter-btn active" type="button" onclick="FC.filterChart('all',this)">Semua</button>
+                        <button class="filter-btn" type="button" onclick="FC.filterChart('maj',this)">Mayor</button>
+                        <button class="filter-btn" type="button" onclick="FC.filterChart('min',this)">Minor</button>
+                    </div>
+                    <div style="overflow-x:auto">
+                        <table class="chart-table" id="chart-table">
+                            <thead>
+                                <tr>
+                                    <th>Tangga Nada</th><th>I</th><th>ii</th><th>iii</th><th>IV</th><th>V</th><th>vi</th><th>vii°</th>
+                                </tr>
+                            </thead>
+                            <tbody id="chart-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- LATIHAN TRANSPOSE -->
+                <div class="fc-sec" id="fc-transpose">
+                    <h3 class="fc-title">Latihan Transpose</h3>
+                    <div class="latihan-center">
+                        <p class="fc-intro">
+                            Chord angka = urutan chord di dalam tangga nada. Di nada dasar C: 1 = C, 2m = Dm, 3m = Em, 4 = F, 5 = G, 6m = Am. Tebak chord hurufnya kalau nada dasarnya diganti.
+                        </p>
+                        <div class="score-strip">
+                            <div class="score-item"><div class="val" id="tr-benar">0</div><div class="lbl">Benar</div></div>
+                            <div class="score-item"><div class="val" id="tr-salah">0</div><div class="lbl">Salah</div></div>
+                            <div class="score-item"><div class="val" id="tr-soal">1</div><div class="lbl">Soal ke</div></div>
+                        </div>
+
+                        <div class="lat-prompt">
+                            <div class="q-label" id="tr-label"></div>
+                            <div class="q-text" id="tr-text"></div>
+                            <div class="play-hint" id="tr-hint"></div>
+                        </div>
+
+                        <div class="options-grid" id="tr-opts" style="grid-template-columns:repeat(2,1fr)"></div>
+                        <div class="feedback-text" id="tr-fb"></div>
+                        <button class="next-btn" id="tr-next" type="button" onclick="FC.nextTr()">Soal Berikutnya →</button>
+                        <div style="margin-top:12px">
+                            <button class="filter-btn" type="button" onclick="FC.initTr()">🔄 Reset Skor</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODAL DETAIL -->
+                <div class="modal-overlay" id="modal-overlay" onclick="FC.closeModal(event)">
+                    <div class="modal" id="modal-box">
+                        <h2 id="m-title">—</h2>
+                        <div class="modal-sub" id="m-sub">—</div>
+                        <div class="info-row" id="m-formula"></div>
+                        <div class="info-row" id="m-scale"></div>
+                        <p style="font-size:12px;color:var(--muted);margin:14px 0 8px">Chord dalam family (klik kartu untuk memutar):</p>
+                        <div class="interval-row" id="m-chords"></div>
+                        <p style="font-size:12px;color:var(--muted);margin:14px 0 8px">Jarak antar nada (semitone):</p>
+                        <div class="info-row" id="m-intervals"></div>
+                        <button class="modal-close" type="button" onclick="FC.closeModal()">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="app.js"></script>
+    <script>
+    (function () {
+    const fcRoot = document.getElementById('family-chord');
+
+    /* ──────────────────────────────────────────
+       DATA
+    ────────────────────────────────────────── */
+    const NOTES_SHARP = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+    const NOTES_FLAT  = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+    const USE_FLAT    = new Set([1,3,5,8,10]);
+
+    function noteAt(root, semitones) {
+      const idx = (root + semitones) % 12;
+      return USE_FLAT.has(idx) ? NOTES_FLAT[idx] : NOTES_SHARP[idx];
+    }
+    function rootIdx(name) {
+      let i = NOTES_SHARP.indexOf(name);
+      if (i < 0) i = NOTES_FLAT.indexOf(name);
+      return i;
+    }
+
+    const MAJ_STEPS = [0,2,4,5,7,9,11];
+    const MIN_STEPS = [0,2,3,5,7,8,10];
+
+    const MAJ_QUALITY = ['maj','min','min','maj','maj','min','dim'];
+    const MAJ_ROMAN   = ['I','ii','iii','IV','V','vi','vii°'];
+    const MIN_QUALITY = ['min','dim','maj','min','min','maj','maj'];
+    const MIN_ROMAN   = ['i','ii°','III','iv','v','VI','VII'];
+
+    const MAJ_ROOTS = ['C','G','D','A','E','B','F#','F','Bb','Eb','Ab','Db'];
+    const MIN_ROOTS = ['A','E','B','F#','C#','G#','D#','D','G','C','F','Bb'];
+
+    function buildFamily(rootName, isMaj) {
+      const ri = rootIdx(rootName);
+      const steps   = isMaj ? MAJ_STEPS   : MIN_STEPS;
+      const quality = isMaj ? MAJ_QUALITY : MIN_QUALITY;
+      const roman   = isMaj ? MAJ_ROMAN   : MIN_ROMAN;
+      return steps.map((s, i) => ({
+        degree: roman[i],
+        root:   noteAt(ri, s),
+        quality: quality[i]
+      }));
+    }
+
+    function scaleNotes(rootName, isMaj) {
+      const ri = rootIdx(rootName);
+      const steps = isMaj ? MAJ_STEPS : MIN_STEPS;
+      return steps.map(s => noteAt(ri, s));
+    }
+
+    function intervalDesc(isMaj) {
+      return isMaj
+        ? 'W–W–H–W–W–W–H  (2–2–1–2–2–2–1 semitone)'
+        : 'W–H–W–W–H–W–W  (2–1–2–2–1–2–2 semitone)';
+    }
+
+    /* ──────────────────────────────────────────
+       NAV
+    ────────────────────────────────────────── */
+    function showSection(id, btn) {
+      fcRoot.querySelectorAll('.fc-sec').forEach(s => s.classList.remove('active'));
+      document.getElementById('fc-' + id).classList.add('active');
+      fcRoot.querySelectorAll('.fc-tabs button').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      if (id === 'latihan' && !latInitialized) initLatihan();
+      if (id === 'teori'   && !teoriInitialized) genTeori();
+      if (id === 'chart'   && !chartInitialized) buildChart();
+      if (id === 'transpose' && !trReady) initTr();
+    }
+
+    /* ──────────────────────────────────────────
+       MATERI CARDS
+    ────────────────────────────────────────── */
+    function buildMateri() {
+      const gMaj = document.getElementById('grid-maj');
+      const gMin = document.getElementById('grid-min');
+
+      MAJ_ROOTS.forEach(r => {
+        const fam = buildFamily(r, true);
+        const chordList = fam.map(c => c.root + (c.quality==='min'?'m':c.quality==='dim'?'°':'')).join(' – ');
+        const card = document.createElement('div');
+        card.className = 'key-card maj';
+        card.innerHTML = `<h3>${r} Mayor <span class="tag">Major</span></h3><p>${chordList}</p>`;
+        card.onclick = () => openModal(r, true);
+        gMaj.appendChild(card);
+      });
+
+      MIN_ROOTS.forEach(r => {
+        const fam = buildFamily(r, false);
+        const chordList = fam.map(c => c.root + (c.quality==='min'?'m':c.quality==='dim'?'°':'')).join(' – ');
+        const card = document.createElement('div');
+        card.className = 'key-card min';
+        card.innerHTML = `<h3>${r} Minor <span class="tag">Minor</span></h3><p>${chordList}</p>`;
+        card.onclick = () => openModal(r, false);
+        gMin.appendChild(card);
+      });
+    }
+
+    /* ──────────────────────────────────────────
+       MODAL
+    ────────────────────────────────────────── */
+    function openModal(rootName, isMaj) {
+      const fam = buildFamily(rootName, isMaj);
+      const sn  = scaleNotes(rootName, isMaj);
+      document.getElementById('m-title').textContent = rootName + (isMaj ? ' Mayor' : ' Minor');
+      document.getElementById('m-sub').textContent   = (isMaj ? 'Tangga nada Mayor' : 'Tangga nada Minor (Natural)') + ' — klik chord untuk mendengarnya';
+      document.getElementById('m-formula').innerHTML = `<strong>Formula interval:</strong> ${intervalDesc(isMaj)}`;
+      document.getElementById('m-scale').innerHTML   = `<strong>Nada dalam tangga nada:</strong> ${sn.join(' – ')}`;
+      document.getElementById('m-intervals').textContent = (isMaj
+        ? '0 → 2 → 4 → 5 → 7 → 9 → 11 (semitone dari root)'
+        : '0 → 2 → 3 → 5 → 7 → 8 → 10 (semitone dari root)');
+
+      const rc = document.getElementById('m-chords');
+      rc.innerHTML = '';
+      fam.forEach(c => {
+        const div = document.createElement('div');
+        div.className = `interval-box chord-${c.quality}`;
+        div.innerHTML = `<div class="roman">${c.degree}</div><div class="note">${c.root}</div><div class="quality">${c.quality==='maj'?'Mayor':c.quality==='min'?'minor':'dim°'}</div>`;
+        div.style.cursor = 'pointer';
+        div.onclick = () => playChord(c.root, c.quality);
+        rc.appendChild(div);
+      });
+
+      document.getElementById('modal-overlay').classList.add('open');
+    }
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('modal-overlay'))
+        document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    /* ──────────────────────────────────────────
+       WEB AUDIO ENGINE
+    ────────────────────────────────────────── */
+    let audioCtx = null;
+    function getCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+    function noteFreq(midiNote) { return 440 * Math.pow(2, (midiNote - 69) / 12); }
+    function midiOf(noteName) {
+      const BASE = {C:60,D:62,E:64,F:65,G:67,A:69,B:71};
+      let n = noteName.replace('#','').replace('b','');
+      let freq = BASE[n] || 60;
+      if (noteName.includes('#')) freq += 1;
+      if (noteName.includes('b')) freq -= 1;
+      return freq;
+    }
+
+    function playNote(midi, startTime, dur, ctx, gain) {
+      const osc = ctx.createOscillator();
+      const env = ctx.createGain();
+      osc.connect(env); env.connect(gain);
+      osc.type = 'triangle';
+      osc.frequency.value = noteFreq(midi);
+      env.gain.setValueAtTime(0, startTime);
+      env.gain.linearRampToValueAtTime(.4, startTime + .02);
+      env.gain.exponentialRampToValueAtTime(.001, startTime + dur);
+      osc.start(startTime); osc.stop(startTime + dur + .05);
+    }
+
+    function chordMidis(rootName, quality) {
+      const r = midiOf(rootName);
+      if (quality === 'maj') return [r, r+4, r+7];
+      if (quality === 'min') return [r, r+3, r+7];
+      if (quality === 'dim') return [r, r+3, r+6];
+      return [r, r+4, r+7];
+    }
+
+    function playChord(rootName, quality, arpeggio) {
+      const ctx   = getCtx();
+      if (ctx.state === 'suspended') ctx.resume();
+      const gain  = ctx.createGain();
+      gain.gain.value = .7;
+      gain.connect(ctx.destination);
+      const now   = ctx.currentTime;
+      const midis = chordMidis(rootName, quality);
+      if (arpeggio) {
+        midis.forEach((m,i) => { playNote(m, now + i*.12, 1.4, ctx, gain); });
+        midis.forEach((m)   => { playNote(m, now + .36,   1.1, ctx, gain); });
+      } else {
+        midis.forEach(m => { playNote(m, now, 1.6, ctx, gain); });
+      }
+    }
+
+    /* ──────────────────────────────────────────
+       LATIHAN AUDIO
+    ────────────────────────────────────────── */
+    let latInitialized = false;
+    let latMode = 'both';
+    let latCurrent = null;
+    let latBenar = 0, latSalah = 0, latSoalKe = 1;
+    let latAnswered = false;
+
+    function setLatMode(m, btn) {
+      latMode = m;
+      document.querySelectorAll('#lat-mode-sel .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      initLatihan();
+    }
+
+    function buildLatPool() {
+      let pool = [];
+      if (latMode === 'both' || latMode === 'maj') MAJ_ROOTS.forEach(r => pool.push({root:r, isMaj:true}));
+      if (latMode === 'both' || latMode === 'min') MIN_ROOTS.forEach(r => pool.push({root:r, isMaj:false}));
+      return pool;
+    }
+
+    function shuffle(a) { for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a; }
+
+    function initLatihan() {
+      latInitialized = true; latBenar = 0; latSalah = 0; latSoalKe = 1;
+      updateScores(); nextLatihan();
+    }
+
+    function updateScores() {
+      document.getElementById('sc-benar').textContent = latBenar;
+      document.getElementById('sc-salah').textContent = latSalah;
+      document.getElementById('sc-soal').textContent  = latSoalKe;
+    }
+
+    function nextLatihan() {
+      latAnswered = false;
+      document.getElementById('lat-next').classList.remove('show');
+      document.getElementById('lat-feedback').textContent = '';
+      document.getElementById('lat-feedback').className = 'feedback-text';
+
+      const pool = buildLatPool();
+      latCurrent = pool[Math.floor(Math.random() * pool.length)];
+
+      const degrees = latCurrent.isMaj ? MAJ_ROMAN : MIN_ROMAN;
+      const qualities = latCurrent.isMaj ? MAJ_QUALITY : MIN_QUALITY;
+      const steps = latCurrent.isMaj ? MAJ_STEPS : MIN_STEPS;
+      const di = Math.floor(Math.random() * 7);
+      latCurrent.degIdx = di;
+
+      const ri = rootIdx(latCurrent.root);
+      latCurrent.chordRoot = noteAt(ri, steps[di]);
+      latCurrent.chordQuality = qualities[di];
+      latCurrent.correctLabel = latCurrent.chordRoot + (qualities[di]==='min'?'m':qualities[di]==='dim'?'°':'');
+      latCurrent.correctFull  = `${degrees[di]} — ${latCurrent.correctLabel} (${latCurrent.root} ${latCurrent.isMaj?'Mayor':'minor'})`;
+
+      document.getElementById('lat-qlabel').textContent = `Dari family chord ${latCurrent.root} ${latCurrent.isMaj?'Mayor':'minor'} — Chord ke berapa ini?`;
+      document.getElementById('lat-qtext').textContent  = '? ? ?';
+
+      let wrong = [];
+      const allPool = [...MAJ_ROOTS.map(r=>({root:r,isMaj:true})),...MIN_ROOTS.map(r=>({root:r,isMaj:false}))];
+      while (wrong.length < 5) {
+        const rp = allPool[Math.floor(Math.random()*allPool.length)];
+        const rs2 = rp.isMaj ? MAJ_STEPS : MIN_STEPS;
+        const rq2 = rp.isMaj ? MAJ_QUALITY : MIN_QUALITY;
+        const di2 = Math.floor(Math.random()*7);
+        const ri2 = rootIdx(rp.root);
+        const cr = noteAt(ri2, rs2[di2]);
+        const cq = rq2[di2];
+        const lbl = cr + (cq==='min'?'m':cq==='dim'?'°':'');
+        if (lbl !== latCurrent.correctLabel && !wrong.find(w=>w.lbl===lbl)) {
+          wrong.push({lbl, root:cr, quality:cq});
+        }
+      }
+      const opts = shuffle([{lbl:latCurrent.correctLabel, root:latCurrent.chordRoot, quality:latCurrent.chordQuality, correct:true}, ...wrong.map(w=>({...w,correct:false}))]);
+
+      const og = document.getElementById('lat-opts');
+      og.innerHTML = '';
+      opts.forEach(o => {
+        const b = document.createElement('button');
+        b.className = 'opt-btn';
+        b.textContent = o.lbl;
+        b.onclick = () => answerLatihan(o, b);
+        og.appendChild(b);
+      });
+
+      setTimeout(() => playCurrentChord(), 300);
+      updateScores();
+    }
+
+    function playCurrentChord() {
+      if (!latCurrent) return;
+      playChord(latCurrent.chordRoot, latCurrent.chordQuality, true);
+    }
+
+    function answerLatihan(opt, btn) {
+      if (latAnswered) return;
+      latAnswered = true;
+      document.querySelectorAll('#lat-opts .opt-btn').forEach(b => b.disabled = true);
+
+      if (opt.correct) {
+        btn.classList.add('correct');
+        latBenar++;
+        const fb = document.getElementById('lat-feedback');
+        fb.textContent = `✓ Benar! ${latCurrent.correctFull}`;
+        fb.className = 'feedback-text ok';
+      } else {
+        btn.classList.add('wrong');
+        latSalah++;
+        document.querySelectorAll('#lat-opts .opt-btn').forEach(b => {
+          if (b.textContent === latCurrent.correctLabel) b.classList.add('correct');
+        });
+        const fb = document.getElementById('lat-feedback');
+        fb.textContent = `✗ Jawaban: ${latCurrent.correctFull}`;
+        fb.className = 'feedback-text err';
+      }
+      latSoalKe++;
+      updateScores();
+      document.getElementById('lat-qtext').textContent = latCurrent.correctLabel;
+      document.getElementById('lat-next').classList.add('show');
+    }
+
+    /* ──────────────────────────────────────────
+       TES TEORI
+    ────────────────────────────────────────── */
+    let teoriInitialized = false;
+
+    const TEORI_TYPES = ['degree-name','chord-quality','scale-membership','tengah-maj-min'];
+
+    function randomFrom(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+    function genTeoriQ() {
+      const type = randomFrom(TEORI_TYPES);
+      return makeQ(type);
+    }
+
+    function makeQ(type) {
+      if (type === 'degree-name') {
+        const isMaj = Math.random() > .5;
+        const root  = randomFrom(isMaj ? MAJ_ROOTS : MIN_ROOTS);
+        const di    = Math.floor(Math.random()*7);
+        const steps    = isMaj ? MAJ_STEPS   : MIN_STEPS;
+        const quality  = isMaj ? MAJ_QUALITY : MIN_QUALITY;
+        const roman    = isMaj ? MAJ_ROMAN   : MIN_ROMAN;
+        const ri = rootIdx(root);
+        const cr = noteAt(ri, steps[di]);
+        const cq = quality[di];
+        const correctAns = cr + (cq==='min'?'m':cq==='dim'?'°':'');
+        const distractors = new Set([correctAns]);
+        while (distractors.size < 4) {
+          const rr = randomFrom(isMaj ? MAJ_ROOTS : MIN_ROOTS);
+          const rd = Math.floor(Math.random()*7);
+          const rri = rootIdx(rr);
+          const rcr = noteAt(rri, steps[rd]);
+          const rcq = quality[rd];
+          distractors.add(rcr + (rcq==='min'?'m':rcq==='dim'?'°':''));
+        }
+        const opts = shuffle([...distractors]);
+        return {
+          q: `Chord ${roman[di]} dari tangga nada <strong>${root} ${isMaj?'Mayor':'minor'}</strong> adalah...`,
+          opts, correct: correctAns,
+          exp: `${roman[di]} dari ${root} ${isMaj?'Mayor':'minor'} = <strong>${correctAns}</strong> (interval ${steps[di]} semitone dari root, kualitas ${cq})`
+        };
+      }
+
+      if (type === 'chord-quality') {
+        const isMaj = Math.random() > .5;
+        const root  = randomFrom(isMaj ? MAJ_ROOTS : MIN_ROOTS);
+        const di    = Math.floor(Math.random()*7);
+        const quality  = isMaj ? MAJ_QUALITY : MIN_QUALITY;
+        const roman    = isMaj ? MAJ_ROMAN   : MIN_ROMAN;
+        const steps    = isMaj ? MAJ_STEPS   : MIN_STEPS;
+        const ri = rootIdx(root);
+        const cr = noteAt(ri, steps[di]);
+        const cq = quality[di];
+        const correctAns = cq === 'maj' ? 'Mayor' : cq === 'min' ? 'minor' : 'diminished';
+        const opts = shuffle(['Mayor','minor','diminished','augmented']);
+        return {
+          q: `Apa kualitas chord ${roman[di]} (${cr}) dalam tangga nada <strong>${root} ${isMaj?'Mayor':'minor'}</strong>?`,
+          opts, correct: correctAns,
+          exp: `Chord ${roman[di]} = ${cr}, kualitas <strong>${correctAns}</strong>`
+        };
+      }
+
+      if (type === 'scale-membership') {
+        const isMaj = Math.random() > .5;
+        const root  = randomFrom(isMaj ? MAJ_ROOTS : MIN_ROOTS);
+        const sn    = scaleNotes(root, isMaj);
+        const correct = randomFrom(sn);
+        const allNotes = NOTES_SHARP.filter(n => !sn.includes(n));
+        const wrongs = shuffle(allNotes).slice(0,3);
+        const opts = shuffle([correct, ...wrongs]);
+        return {
+          q: `Nada mana yang <strong>ada</strong> dalam tangga nada ${root} ${isMaj?'Mayor':'minor'}?`,
+          opts, correct,
+          exp: `Tangga nada ${root} ${isMaj?'Mayor':'minor'}: ${sn.join(' – ')}`
+        };
+      }
+
+      if (type === 'tengah-maj-min') {
+        const isMaj = Math.random() > .5;
+        const root  = randomFrom(isMaj ? MAJ_ROOTS : MIN_ROOTS);
+        const di    = Math.floor(Math.random()*7);
+        const steps   = isMaj ? MAJ_STEPS   : MIN_STEPS;
+        const quality = isMaj ? MAJ_QUALITY : MIN_QUALITY;
+        const roman   = isMaj ? MAJ_ROMAN   : MIN_ROMAN;
+        const ri = rootIdx(root);
+        const cr = noteAt(ri, steps[di]);
+        const cq = quality[di];
+        const thirdSemitone = (cq === 'maj') ? 4 : 3;
+        const thirdNote = noteAt(rootIdx(cr), thirdSemitone);
+        const correctAns = (cq === 'maj') ? 'Mayor (major 3rd, jarak 4 semitone)' : 'minor (minor 3rd, jarak 3 semitone)';
+        const opts = ['Mayor (major 3rd, jarak 4 semitone)','minor (minor 3rd, jarak 3 semitone)'];
+        return {
+          q: `Chord ${roman[di]} dari ${root} ${isMaj?'Mayor':'minor'} = <strong>${cr}</strong>. Nada tengah (3rd) adalah <strong>${thirdNote}</strong> — ini jarak Mayor atau minor 3rd?`,
+          opts, correct: correctAns,
+          exp: `${cr} ${cq} → 3rd-nya = ${thirdNote}, jarak ${thirdSemitone} semitone → <strong>${cq==='maj'?'Mayor 3rd':'minor 3rd'}</strong>`
+        };
+      }
+    }
+
+    function renderTeori(questions) {
+      const c = document.getElementById('teori-container');
+      c.innerHTML = '';
+      questions.forEach((q, qi) => {
+        const div = document.createElement('div');
+        div.className = 'teori-q';
+        const optsHtml = q.opts.map(o =>
+          `<button class="teori-opt" type="button" onclick="FC.answerTeori(this,'${o.replace(/'/g,"\\'")}','${q.correct.replace(/'/g,"\\'")}')">${o}</button>`
+        ).join('');
+        div.innerHTML = `
+          <div class="q-num">Soal ${qi+1}</div>
+          <div class="q-main">${q.q}</div>
+          <div class="teori-opts">${optsHtml}</div>
+          <div class="teori-exp" id="texp-${qi}">${q.exp}</div>
+        `;
+        c.appendChild(div);
+      });
+    }
+
+    function answerTeori(btn, chosen, correct) {
+      const qDiv = btn.closest('.teori-q');
+      qDiv.querySelectorAll('.teori-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correct) b.classList.add('correct');
+      });
+      if (chosen !== correct) btn.classList.add('wrong');
+      const expIdx = Array.from(document.querySelectorAll('#teori-container .teori-q')).indexOf(qDiv);
+      const expEl = document.querySelectorAll('#teori-container .teori-exp')[expIdx];
+      if (expEl) expEl.classList.add('show');
+    }
+
+    function genTeori() {
+      teoriInitialized = true;
+      const qs = Array.from({length:6}, () => genTeoriQ());
+      renderTeori(qs);
+    }
+
+    function genTeoriTengah() {
+      teoriInitialized = true;
+      const qs = Array.from({length:6}, () => makeQ('tengah-maj-min'));
+      renderTeori(qs);
+    }
+
+    /* ──────────────────────────────────────────
+       CHORD CHART
+    ────────────────────────────────────────── */
+    let chartInitialized = false;
+    let chartFilter = 'all';
+
+    function buildChart() {
+      chartInitialized = true;
+      renderChart();
+    }
+
+    function filterChart(f, btn) {
+      chartFilter = f;
+      document.querySelectorAll('#fc-chart .filter-row .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderChart();
+    }
+
+    function renderChart() {
+      const tbody = document.getElementById('chart-body');
+      tbody.innerHTML = '';
+      const rows = [];
+      MAJ_ROOTS.forEach(r => rows.push({root:r, isMaj:true}));
+      MIN_ROOTS.forEach(r => rows.push({root:r, isMaj:false}));
+
+      rows.forEach(row => {
+        if (chartFilter === 'maj' && !row.isMaj) return;
+        if (chartFilter === 'min' &&  row.isMaj) return;
+        const fam = buildFamily(row.root, row.isMaj);
+        const tr = document.createElement('tr');
+        const name = `${row.root} ${row.isMaj?'Mayor':'minor'}`;
+        tr.innerHTML = `<td style="font-weight:600;color:${row.isMaj?'#f0b7bf':'var(--gold)'}">${name}</td>` +
+          fam.map(c => {
+            const lbl = c.root + (c.quality==='min'?'m':c.quality==='dim'?'°':'');
+            const cls = c.quality==='maj'?'maj':c.quality==='min'?'min':'dim';
+            return `<td><span class="badge ${cls}" style="cursor:pointer" onclick="FC.playChord('${c.root}','${c.quality}',true)" title="Putar ${lbl}">${lbl}</span></td>`;
+          }).join('');
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* ══════════════════════════════════════════
+       CHORD ANGKA & HURUF — dipakai Latihan Transpose
+    ══════════════════════════════════════════ */
+    const PITCH = {'C':0,'C#':1,'Db':1,'D':2,'D#':3,'Eb':3,'E':4,'F':5,'F#':6,'Gb':6,'G':7,'G#':8,'Ab':8,'A':9,'A#':10,'Bb':10,'B':11};
+    const KEYS = [
+      {n:'C',s:0,f:false},{n:'C#/Db',s:1,f:true},{n:'D',s:2,f:false},{n:'D#/Eb',s:3,f:true},
+      {n:'E',s:4,f:false},{n:'F',s:5,f:true},{n:'F#/Gb',s:6,f:false},{n:'G',s:7,f:false},
+      {n:'G#/Ab',s:8,f:true},{n:'A',s:9,f:false},{n:'A#/Bb',s:10,f:true},{n:'B',s:11,f:false}
+    ];
+    const DEG_FLAT  = ['1','b2','2','b3','3','4','#4','5','b6','6','b7','7'];
+    const DEG_SHARP = ['1','#1','2','#2','3','4','#4','5','#5','6','#6','7'];
+
+    function spell(semi, flat) { return (flat ? NOTES_FLAT : NOTES_SHARP)[((semi % 12) + 12) % 12]; }
+
+    function parseChord(c) {
+      const m = c.match(/^([A-G][#b]?)([^\/]*)(?:\/([A-G][#b]?))?$/);
+      if (!m) throw new Error('Chord tidak dikenal: ' + c);
+      return { root: PITCH[m[1]], suffix: m[2], bass: m[3] ? PITCH[m[3]] : null };
+    }
+
+    function sufNum(s) {
+      if (s === '' || s === 'm') return s;
+      if (s === 'dim') return '°';
+      return '<sup>' + s + '</sup>';
+    }
+
+    function numHTML(c) {
+      const p = parseChord(c);
+      let out = DEG_FLAT[p.root] + sufNum(p.suffix);
+      if (p.bass !== null) {
+        const sharp = ((p.bass - p.root + 12) % 12) === 4;
+        out += '/' + (sharp ? DEG_SHARP : DEG_FLAT)[p.bass];
+      }
+      return out;
+    }
+
+    function letterFor(c, key) {
+      if (key.s === 0) return c;
+      const p = parseChord(c);
+      return spell(p.root + key.s, key.f) + p.suffix +
+             (p.bass !== null ? '/' + spell(p.bass + key.s, key.f) : '');
+    }
+
+    /* ══════════════════════════════════════════
+       LATIHAN TRANSPOSE
+    ══════════════════════════════════════════ */
+    let trReady = false, trB = 0, trS = 0, trN = 1, trDone = false, trCur = null;
+
+    function simpleSongChords() {
+      return ['C','Dm','Em','F','G','Am'].map(c => ({ c, title: '' }));
+    }
+
+    function updateTrScores() {
+      document.getElementById('tr-benar').textContent = trB;
+      document.getElementById('tr-salah').textContent = trS;
+      document.getElementById('tr-soal').textContent  = trN;
+    }
+
+    function initTr() { trReady = true; trB = 0; trS = 0; trN = 1; nextTr(); }
+
+    function nextTr() {
+      trDone = false;
+      document.getElementById('tr-next').classList.remove('show');
+      const fb = document.getElementById('tr-fb'); fb.textContent = ''; fb.className = 'feedback-text';
+
+      const pool = simpleSongChords();
+      const item = randomFrom(pool);
+      const key  = randomFrom(KEYS.slice(1));
+      const p    = parseChord(item.c);
+      const rootName = spell(p.root + key.s, key.f);
+      const correct  = letterFor(item.c, key);
+      const num      = numHTML(item.c);
+
+      const opts = new Set([correct]);
+      opts.add(rootName + (p.suffix === 'm' ? '' : 'm'));
+      while (opts.size < 4) {
+        const semi = key.s + randomFrom(MAJ_STEPS);
+        opts.add(spell(semi, key.f) + randomFrom(['', 'm']));
+      }
+      trCur = { correct, rootName, quality: p.suffix === 'm' ? 'min' : 'maj', key, num, item };
+
+      document.getElementById('tr-label').textContent = 'Chord angka di nada dasar C';
+      document.getElementById('tr-text').innerHTML = 'Angka <b style="color:var(--gold)">' + num + '</b> di nada dasar ' + key.n + ' = chord apa?';
+      document.getElementById('tr-hint').textContent = '(Di nada dasar C, angka ini = ' + item.c + ')';
+
+      const og = document.getElementById('tr-opts'); og.innerHTML = '';
+      shuffle([...opts]).forEach(o => {
+        const b = document.createElement('button');
+        b.className = 'opt-btn'; b.textContent = o;
+        b.onclick = () => answerTr(o, b);
+        og.appendChild(b);
+      });
+      updateTrScores();
+    }
+
+    function answerTr(label, btn) {
+      if (trDone) return; trDone = true;
+      document.querySelectorAll('#tr-opts .opt-btn').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === trCur.correct) b.classList.add('correct');
+      });
+      const ok = label === trCur.correct;
+      if (ok) trB++; else { trS++; btn.classList.add('wrong'); }
+      const scale = MAJ_STEPS.map(st => spell(trCur.key.s + st, trCur.key.f)).join(' – ');
+      const fb = document.getElementById('tr-fb');
+      fb.innerHTML = (ok ? '✓ Benar! ' : '✗ ') + 'Angka ' + trCur.num + ' di ' + trCur.key.n + ' = <b>' + trCur.correct +
+                     '</b><br><span style="color:var(--muted)">Tangga nada ' + trCur.key.n + ' Mayor: ' + scale + '</span>';
+      fb.className = 'feedback-text ' + (ok ? 'ok' : 'err');
+      trN++; updateTrScores();
+      try { playChord(trCur.rootName, trCur.quality, true); } catch (e) {}
+      document.getElementById('tr-next').classList.add('show');
+    }
+
+    /* ── expose hanya yang dipakai handler inline ── */
+    window.FC = {
+      showSection: showSection, setLatMode: setLatMode, playCurrentChord: playCurrentChord,
+      nextLatihan: nextLatihan, initLatihan: initLatihan, genTeori: genTeori,
+      genTeoriTengah: genTeoriTengah, answerTeori: answerTeori, filterChart: filterChart,
+      closeModal: closeModal, nextTr: nextTr, initTr: initTr, playChord: playChord
+    };
+
+    buildMateri();
+    })();
+    
+    </script>
+</body>
+</html>

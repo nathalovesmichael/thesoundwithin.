@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C2B4D">
+    <meta name="description" content="The Sound Within. Ruang untuk belajar teori musik, memahami harmoni, dan melatih pendengaran.">
+    <title>Track Progress — THE SOUND WITHIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59GLZ4RQGR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-59GLZ4RQGR');
+    </script>
+</head>
+
+<body>
+    <div id="site-gate"></div>
+    <div id="site-header"></div>
+
+    <main>
+        <!-- TRACK PROGRESS -->
+        <section class="section" id="track-progress">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">YOUR LEARNING JOURNEY</p><h2>Track your progress.</h2></div>
+                    <p class="section-description">Pantau ruang belajar yang sudah kamu selesaikan. Progres tersimpan di browser yang sama.</p>
+                </div>
+                <div class="progress-tracker">
+                    <div class="progress-overview">
+                        <div><strong>Overall Progress</strong><div class="muted" style="color:var(--gray);font-size:13px;margin-top:4px" id="progress-count">0 dari 3 ruang selesai</div></div>
+                        <strong id="progress-percent" style="font-size:24px; color:var(--white);">0%</strong>
+                    </div>
+                    <div class="progress-track" role="progressbar" aria-label="Overall learning progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar"><div class="progress-track-fill" id="progress-fill"></div></div>
+                    <div class="progress-items">
+                        <article class="progress-item" id="progress-reading">
+                            <h3>01 · Reading</h3><p>Latihan membaca not balok.</p>
+                            <div class="progress-state" id="progress-reading-state">Belum selesai</div>
+                            <button class="progress-mark" type="button" data-progress="reading">Tandai selesai</button>
+                        </article>
+                        <article class="progress-item" id="progress-listening">
+                            <h3>02 · Listening</h3><p>Latihan mengenali progresi chord.</p>
+                            <div class="progress-state" id="progress-listening-state">Belum selesai</div>
+                            <button class="progress-mark" type="button" data-progress="listening">Tandai selesai</button>
+                        </article>
+                        <article class="progress-item" id="progress-speaking">
+                            <h3>03 · Speaking</h3><p>Latihan humming dan mengenali nada root.</p>
+                            <div class="progress-state" id="progress-speaking-state">Belum selesai</div>
+                            <button class="progress-mark" type="button" data-progress="speaking">Tandai selesai</button>
+                        </article>
+                    </div>
+                    <p style="color:var(--gray);font-size:11px;margin:16px 0 0">Reading dan Speaking akan tercatat otomatis setelah tes selesai. Listening bisa ditandai selesai secara manual setelah kamu menyelesaikan latihannya.</p>
+                    <div class="progress-actions">
+                        <button class="progress-reset" type="button" id="resetProgressBtn">Reset progress tracker</button>
+                        <button class="progress-reset" type="button" id="resetLatihanBtn">Reset latihan</button>
+                        <span class="progress-msg" id="resetMsg" aria-live="polite"></span>
+                    </div>
+                    <p class="progress-hint">Reset progress tracker menghapus tanda selesai. Reset latihan menghapus skor Reading, Listening, dan Speaking yang tersimpan (dipakai sertifikat).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- KOTAK SERTIFIKAT -->
+        <section class="section" id="certificate">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">YOUR CERTIFICATE</p><h2>Claim your certificate.</h2></div>
+                    <p class="section-description">Sertifikat memuat nama, tanggal, skor Reading, Listening, Speaking, dan overall band score.</p>
+                </div>
+                <div class="certificate-box">
+                    <div>
+                        <h3>Sertifikat The Sound Within</h3>
+                        <p>Unduh sertifikat setelah kamu mengerjakan komponen yang ingin dicantumkan. Komponen yang belum dikerjakan akan tertulis "Belum dikerjakan".</p>
+                    </div>
+                    <button class="cert-download-btn" id="hft-certificateBtnAlways" type="button">UNDUH SERTIFIKAT</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
