@@ -35,10 +35,10 @@
                 <span class="brand-name">THE SOUND WITHIN<small>THE ART OF UNDERSTANDING MUSIC</small></span>
             </a>
             <nav class="nav-links" id="navLinks">
-                <a href="index.html">Beranda</a>
-                <a href="index.html#menu">Jelajahi</a>
+                <a href="index.html">Home</a>
                 <a href="family-chord.html">Family Chord</a>
                 <a href="progress.html">Track Progress</a>
+                <a href="progress.html#certificate">Sertifikat</a>
                 <a href="tentang.html">Tentang Kami</a>
                 <a href="tentang.html#profiles">Our Profiles</a>
                 <a href="reading.html#reading-material">Materi Musik</a>
@@ -58,7 +58,7 @@
                 <span class="brand-name">THE SOUND WITHIN<small>THE ART OF UNDERSTANDING MUSIC</small></span>
             </a>
             <div class="footer-links">
-                <a href="index.html">Beranda</a><a href="index.html#menu">Jelajahi</a><a href="tentang.html">Tentang Kami</a><a href="komunitas.html">Komunitas</a><a href="komunitas.html#exclusive">Eksklusif</a>
+                <a href="index.html">Home</a><a href="progress.html#certificate">Sertifikat</a><a href="tentang.html">Tentang Kami</a><a href="komunitas.html">Komunitas</a><a href="komunitas.html#exclusive">Eksklusif</a>
             </div>
             <span>© <span id="year"></span> The Sound Within — Nadine Nathania (Universitas Indonesia)</span>
         </div>
