@@ -823,6 +823,14 @@
         .tsw-toast .tsw-toast-x:hover { color: var(--white); }
         @media (max-width: 480px) { .tsw-toast { left: 15px; right: 15px; max-width: none; } }
     </style>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59GLZ4RQGR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-59GLZ4RQGR');
+    </script>
 </head>
 
 <body class="name-gate-open">
@@ -3013,6 +3021,22 @@
         function nowHM() { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
         function firstName() { return account && account.name ? account.name.split(' ')[0] : ''; }
 
+        /* ▼▼ ISI dengan URL Web App Google Apps Script (berakhiran /exec) untuk mencatat nama & email pengunjung ke Google Sheets ▼▼ */
+        const LOG_URL = '';
+        /* ▲▲ ─────────────────────────────────────────────────────────────────────────────────────────────── ▲▲ */
+        function logVisitor(type, name, email) {
+            if (!LOG_URL) return;
+            try {
+                fetch(LOG_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ type: type, name: name || '', email: email || '', page: location.href, ua: navigator.userAgent }) });
+            } catch (e) {}
+        }
+        function logOnce(type, name, email) {
+            const id = email || name || '';
+            try { if (sessionStorage.getItem('tsw_logged') === id) return; sessionStorage.setItem('tsw_logged', id); } catch (e) {}
+            logVisitor(type, name, email);
+        }
+
         function closeGate(name) {
             if (greeting && name) greeting.textContent = 'SELAMAT DATANG, ' + name.toLocaleUpperCase('id-ID');
             gate.hidden = true;
@@ -3057,6 +3081,7 @@
                     localStorage.setItem(ID_KEY, JSON.stringify({ name: account.name, date: today() }));
                 } catch (e) {}
                 closeGate(account.name);
+                logOnce('google_login', account.name, account.email);
                 renderAccount();
                 const home = $('home'); if (home) home.scrollIntoView({ behavior: 'auto', block: 'start' });
                 showToast('Berhasil masuk', 'Halo, ' + firstName() + '! Pengingat belajar bisa kamu aktifkan di bagian Komunitas.');
@@ -3217,9 +3242,13 @@
         if (account) {
             try { localStorage.setItem(ID_KEY, JSON.stringify({ name: account.name, date: today() })); } catch (e) {}
             closeGate(account.name);
+            logOnce('google_return', account.name, account.email);
         } else if (resume && ident && ident.name) {
             closeGate(ident.name);
         }
+
+        const nameForm = $('nameGateForm');
+        if (nameForm) nameForm.addEventListener('submit', function () { const n = ($('visitorName').value || '').trim(); if (n) logOnce('manual', n, ''); });
 
         renderAccount();
         checkReminder();
